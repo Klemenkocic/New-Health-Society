@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { questions, natureDescriptions } from "@/data/braverman"
+import { questions, natureDescriptions, deficiencyDescriptions } from "@/data/braverman"
 import { Check, ArrowRight } from "lucide-react"
 
 type Step = "intro" | "quiz" | "email" | "results"
@@ -18,33 +18,52 @@ export function QuizEngine() {
         setAnswers(prev => ({ ...prev, [questions[currentQuestionIndex].id]: value }))
 
         if (currentQuestionIndex < questions.length - 1) {
-            setTimeout(() => setCurrentQuestionIndex(prev => prev + 1), 200) // Small delay for UX
+            setTimeout(() => setCurrentQuestionIndex(prev => prev + 1), 200)
         } else {
-            setStep("email")
+            // Quiz complete, move to email step
+            setTimeout(() => setStep("email"), 300)
         }
     }
 
     const calculateResults = () => {
-        // Logic: Count TRUE answers per category
-        const scores = { dopamine: 0, acetylcholine: 0, gaba: 0, serotonin: 0 }
+        // Count TRUE answers for each category
+        const scores = {
+            dopamine_nature: 0,
+            dopamine_deficiency: 0,
+            acetylcholine_nature: 0,
+            acetylcholine_deficiency: 0,
+            gaba_nature: 0,
+            gaba_deficiency: 0,
+            serotonin_nature: 0,
+            serotonin_deficiency: 0
+        }
 
         questions.forEach(q => {
             if (answers[q.id]) {
-                if (q.category === "dopamine_nature") scores.dopamine++
-                if (q.category === "acetylcholine_nature") scores.acetylcholine++
-                if (q.category === "gaba_nature") scores.gaba++
-                if (q.category === "serotonin_nature") scores.serotonin++
+                scores[q.category as keyof typeof scores]++
             }
         })
 
-        // Find dominant
-        const maxScore = Math.max(...Object.values(scores))
-        const dominant = Object.keys(scores).find(k => scores[k as keyof typeof scores] === maxScore)
+        // Calculate net scores (nature - deficiency) for each neurotransmitter
+        const netScores = {
+            dopamine: scores.dopamine_nature - scores.dopamine_deficiency,
+            acetylcholine: scores.acetylcholine_nature - scores.acetylcholine_deficiency,
+            gaba: scores.gaba_nature - scores.gaba_deficiency,
+            serotonin: scores.serotonin_nature - scores.serotonin_deficiency
+        }
 
-        return { scores, dominant }
+        // Find dominant neurotransmitter
+        const maxScore = Math.max(...Object.values(netScores))
+        const dominant = Object.keys(netScores).find(k => netScores[k as keyof typeof netScores] === maxScore) as keyof typeof netScores
+
+        // Identify deficiencies (negative net scores)
+        const deficiencies = Object.keys(netScores).filter(k => netScores[k as keyof typeof netScores] < 0) as Array<keyof typeof netScores>
+
+        return { scores, netScores, dominant, deficiencies }
     }
 
     const results = calculateResults()
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100
 
     return (
         <div className="w-full max-w-2xl mx-auto bg-white rounded-sm shadow-xl p-8 md:p-12 min-h-[500px] flex flex-col justify-center border border-foreground/5">
@@ -61,8 +80,9 @@ export function QuizEngine() {
                     >
                         <h2 className="font-serif font-bold text-3xl mb-6">THE BRAVERMAN TEST</h2>
                         <p className="font-inter text-foreground/70 mb-8 leading-relaxed">
-                            This assessment determines your neuro-chemical dominance and efficiency.
-                            It allows us to tailor your training volume, frequency, and nutrition.
+                            This assessment determines your neuro-chemical dominance and deficiencies.
+                            It evaluates four key neurotransmitters: Dopamine, Acetylcholine, GABA, and Serotonin.
+                            Your results will help us tailor your training, recovery, and nutrition protocols.
                         </p>
                         <div className="text-sm font-mono text-foreground/40 mb-12">
                             EST TIME: 10 MIN • 160 QUESTIONS
@@ -83,11 +103,12 @@ export function QuizEngine() {
                         className="w-full"
                     >
                         {/* Progress */}
-                        <div className="w-full h-1 bg-neutral-100 mb-12">
+                        <div className="w-full h-1 bg-neutral-100 mb-12 rounded-full overflow-hidden">
                             <motion.div
                                 className="h-full bg-primary"
                                 initial={{ width: 0 }}
-                                animate={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
+                                animate={{ width: `${progress}%` }}
+                                transition={{ duration: 0.3 }}
                             />
                         </div>
 
@@ -95,8 +116,8 @@ export function QuizEngine() {
                             Question {currentQuestionIndex + 1} / {questions.length}
                         </div>
 
-                        <h3 className="font-serif text-2xl md:text-3xl mb-12 leading-tight min-h-[120px]">
-                            {questions[currentQuestionIndex].text}
+                        <h3 className="font-serif text-2xl md:text-3xl mb-12 leading-tight min-h-[120px] flex items-center">
+                            {questions[currentQuestionIndex]?.text || "Loading..."}
                         </h3>
 
                         <div className="flex gap-4">
@@ -125,20 +146,34 @@ export function QuizEngine() {
                         animate={{ opacity: 1 }}
                         className="text-center"
                     >
-                        <h2 className="font-serif font-bold text-2xl mb-6">ALMOST DONE</h2>
-                        <p className="mb-8 opacity-70">Enter your email to save your results and receive your detailed report.</p>
+                        <div className="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Check className="w-8 h-8" />
+                        </div>
+
+                        <h2 className="font-serif font-bold text-3xl mb-4">ASSESSMENT COMPLETE!</h2>
+                        <p className="text-lg mb-8 text-foreground/80">
+                            Receive your personalized Braverman Test results via email
+                        </p>
+                        <p className="text-sm mb-8 text-foreground/60">
+                            We'll send you a comprehensive PDF report with your neurotransmitter profile,
+                            detailed analysis, and personalized recommendations for training, nutrition, and supplementation.
+                        </p>
 
                         <input
                             type="email"
                             placeholder="your@email.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-4 border border-foreground/20 rounded-sm mb-6 focus:outline-none focus:border-primary"
+                            className="w-full p-4 border border-foreground/20 rounded-sm mb-6 focus:outline-none focus:border-primary text-lg"
                         />
 
-                        <Button onClick={() => setStep("results")} disabled={!email} size="lg" className="w-full">
-                            See Results <ArrowRight className="ml-2 w-4 h-4" />
+                        <Button onClick={() => setStep("results")} disabled={!email} size="lg" className="w-full h-14 text-lg">
+                            Send My Results <ArrowRight className="ml-2 w-5 h-5" />
                         </Button>
+
+                        <p className="text-xs text-foreground/40 mt-4">
+                            Your results will be sent within 24 hours
+                        </p>
                     </motion.div>
                 )}
 
@@ -155,33 +190,50 @@ export function QuizEngine() {
                         </div>
 
                         <h2 className="font-serif font-bold text-3xl mb-2">
-                            TYPE: {results.dominant?.toUpperCase() || "BALANCED"}
+                            RESULTS SENT!
                         </h2>
 
-                        <p className="text-foreground/70 mb-8 italic">
-                            "{natureDescriptions[results.dominant as keyof typeof natureDescriptions]}"
+                        <p className="text-foreground/70 mb-4 text-lg">
+                            Check your inbox at <span className="font-bold text-primary">{email}</span>
                         </p>
 
-                        <div className="bg-neutral-50 p-6 rounded-sm mb-8 text-left space-y-4">
-                            {Object.entries(results.scores).map(([key, score]) => (
-                                <div key={key}>
-                                    <div className="flex justify-between text-xs font-bold uppercase mb-1">
-                                        <span>{key}</span>
-                                        <span>{score} pts</span>
+                        <p className="text-foreground/60 mb-8">
+                            Your personalized Braverman Test PDF report will arrive within 24 hours.
+                        </p>
+
+                        {/* Quick Preview */}
+                        <div className="bg-neutral-50 border border-neutral-200 p-6 rounded-sm mb-8 text-left">
+                            <h3 className="font-bold text-sm uppercase mb-4 text-center">Quick Preview</h3>
+
+                            <div className="mb-4">
+                                <p className="text-sm font-bold mb-2">Dominant Type:</p>
+                                <p className="text-2xl font-serif font-bold text-primary">{results.dominant?.toUpperCase()}</p>
+                                <p className="text-sm text-foreground/70 italic mt-1">
+                                    {natureDescriptions[results.dominant as keyof typeof natureDescriptions]}
+                                </p>
+                            </div>
+
+                            <div className="space-y-3 mt-6">
+                                <p className="text-xs font-bold uppercase text-foreground/50">Balance Overview:</p>
+                                {Object.entries(results.netScores).map(([key, score]) => (
+                                    <div key={key} className="flex items-center justify-between">
+                                        <span className="text-sm capitalize">{key}</span>
+                                        <span className={`text-sm font-bold ${score >= 0 ? "text-green-600" : "text-red-600"}`}>
+                                            {score > 0 ? "+" : ""}{score}
+                                        </span>
                                     </div>
-                                    <div className="w-full h-2 bg-neutral-200 rounded-full overflow-hidden">
-                                        <div
-                                            className="h-full bg-primary"
-                                            style={{ width: `${(score / 5) * 100}%` }} // Assuming max 4-5 dummy questions
-                                        />
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
 
-                        <a href="/consultation">
-                            <Button className="w-full">Book Consultation Analysis</Button>
-                        </a>
+                        <div className="space-y-4">
+                            <a href="/consultation">
+                                <Button className="w-full h-14 text-lg">Book Consultation for In-Depth Analysis</Button>
+                            </a>
+                            <a href="/">
+                                <Button variant="outline" className="w-full h-14 text-lg">Return to Homepage</Button>
+                            </a>
+                        </div>
                     </motion.div>
                 )}
 

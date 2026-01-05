@@ -1,70 +1,54 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function Hero() {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const { scrollY } = useScroll()
-
-    {/* Animation values for main text removed as it is now in ScrollLogo */ }
-
-    // Secondary elements fade out faster
-    const secondaryOpacity = useTransform(scrollY, [0, 100], [1, 0])
-
     return (
-        <section ref={containerRef} className="relative h-screen min-h-[800px] w-full overflow-hidden bg-[#F3F0E5]">
-            {/* Scroll Trigger / Height Setter */}
-            <div className="absolute inset-0 z-0">
-                {/* Main Content Container */}
-                <div className="relative h-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-8 pt-32">
+        <section className="relative h-screen min-h-[800px] w-full bg-[#F3F0E5] flex items-end pb-12 px-6 md:px-12">
+            {/* Background Video or Image would be absolute inset-0 z-0 */}
 
-                    {/* Left Side: Text Content */}
-                    <div className="col-span-1 md:col-span-12 flex flex-col justify-center relative z-10">
+            <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
 
-                        {/* Small Title */}
-                        <motion.div
-                            style={{ opacity: secondaryOpacity }}
-                            className="text-primary font-medium text-sm md:text-base tracking-wide mb-4"
-                        >
-                            Performance meets Science
-                        </motion.div>
-
-                        {/* Subtitle */}
-                        <motion.div
-                            style={{ opacity: secondaryOpacity }}
-                            className="text-foreground/90 text-lg md:text-xl font-normal max-w-md mb-12 leading-relaxed"
-                        >
-                            3x60 min/week. Measurable results in 4 months. Science-backed. No excuses.
-                        </motion.div>
-
-                        {/* BIG HERO TEXT */}
-                        {/* BIG HERO TEXT - MOVED TO SCROLL LOGO COMPONENT */}
-                        {/* Spacer removed to allow text to be above the fixed bottom logo */}
-                    </div>
-
-                    {/* Right Side: Video Element (Absolute positioned usually or grid) */}
-                    {/* Based on wireframe, video is on the right. 
-              "Video: Real training footage, natural light, in-action shots"
-           */}
+                {/* Bottom Left: Title */}
+                <div className="col-span-1 md:col-span-8">
                     <motion.div
-                        style={{ opacity: secondaryOpacity }}
-                        className="absolute top-1/4 right-6 md:right-12 w-[300px] md:w-[400px] aspect-[9/16] bg-black/5 rounded-sm overflow-hidden z-0 hidden md:block"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-8"
                     >
-                        {/* Abstract video placeholder using a simple gradient or maybe a stock video if I had one. 
-                 Using a div for now. */}
-                        <div className="w-full h-full bg-neutral-200 flex items-center justify-center text-neutral-400">
-                            Video Placeholder
-                        </div>
+                        <div className="text-sm font-medium text-primary tracking-wide mb-2">Performance meets Science</div>
+                        <h1 className="font-serif font-extrabold text-[12vw] md:text-[8rem] leading-[0.9] text-foreground origin-bottom-left mb-6">
+                            NEW HEALTH<br />SOCIETY
+                        </h1>
+                        <p className="text-foreground/90 text-lg md:text-xl font-normal max-w-md leading-relaxed">
+                            3x60 min/week. Measurable results in 4 months. Science-backed. No excuses.
+                        </p>
+                    </motion.div>
+                </div>
 
-                        {/* Quote under video */}
-                        <div className="absolute -bottom-24 left-0 w-64">
-                            <p className="font-serif italic text-lg text-foreground">
-                                "Roberto: -16kg. He feels better at 54 than at 40."
-                            </p>
-                        </div>
+                {/* Bottom Right: CTA & Video Preview */}
+                <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-end gap-6">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
+                        className="w-full aspect-video bg-neutral-200 rounded-sm overflow-hidden relative group cursor-pointer"
+                    >
+                        <span className="absolute inset-0 flex items-center justify-center text-neutral-500 font-mono text-xs">
+                            [Training Footage Video]
+                        </span>
+                        {/* Play Button Overlay */}
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
                     </motion.div>
 
+                    <Link href="/consultation">
+                        <Button size="lg" className="px-8 text-lg h-14">
+                            Book Initial Consultation
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </section>

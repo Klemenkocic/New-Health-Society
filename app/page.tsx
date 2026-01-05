@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
-import { ScrollLogo } from "@/components/layout/scroll-logo"
 import { Hero } from "@/components/landing/hero"
 import { QuoteSection } from "@/components/landing/quote"
 import { ProblemSection } from "@/components/landing/problem"
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
       <Navbar />
-      <ScrollLogo />
 
       <Hero />
       <QuoteSection />
