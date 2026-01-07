@@ -1,27 +1,29 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus } from "lucide-react"
+import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
 
 const models = [
+
     {
         id: "coaching",
         title: "COACHING",
         desc: "The foundation. We audit your lifestyle, nutrition, and recovery. Then we build the plan.",
-        image: "bg-blue-900" // Placeholder color
+        imageSrc: "/images/gym/NHS Website-31.jpg"
     },
     {
         id: "group",
         title: "SMALL GROUP",
         desc: "Maximum 10 people. Individual programs. The energy of a team, the precision of a private session.",
-        image: "bg-emerald-900"
+        imageSrc: "/images/gym/NHS Website-32.jpg"
     },
     {
         id: "personal",
         title: "PERSONAL TRAINING",
         desc: "100% attention. For rehabilitation, specific athletic goals, or maximum efficiency.",
-        image: "bg-purple-900"
+        imageSrc: "/images/gym/NHS Website-33.jpg"
     }
 ]
 
@@ -80,15 +82,21 @@ export function ThreeModelsSection() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.5 }}
-                                    className={`absolute inset-0 w-full h-full ${model.image} flex items-center justify-center text-white/50 font-mono text-2xl`}
+                                    className="absolute inset-0 w-full h-full cursor-default"
                                 >
-                                    [Image: {model.title}]
+                                    <Image
+                                        src={model.imageSrc}
+                                        alt={model.title}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black/20" /> {/* Slight overlay for text contrast if needed? Actually removing text placeholder */}
                                 </motion.div>
                             )
                         ))}
                     </AnimatePresence>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

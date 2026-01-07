@@ -2,13 +2,12 @@
 
 import useEmblaCarousel from "embla-carousel-react"
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react"
+import Image from "next/image"
 import { useCallback } from "react"
 
 const coaches = [
-    { name: "Michael S.", role: "Head Coach", quote: "Excellence is not an act, but a habit.", image: "bg-neutral-800" },
-    { name: "Sarah L.", role: "Performance Specialist", quote: "Your body is smarter than you think. Listen to it.", image: "bg-neutral-700" },
-    { name: "David K.", role: "Rehabilitation Expert", quote: "Movement is medicine. Dosage matters.", image: "bg-neutral-600" },
-    { name: "Jessica R.", role: "Nutrition Coach", quote: "Fuel the machine. Don't just fill it.", image: "bg-neutral-500" },
+    { name: "Alex S.", role: "Head Coach", quote: "Excellence is not an act, but a habit.", imageSrc: "/images/gym/NHS Website-36.jpg" },
+    { name: "Klemen K.", role: "Head of Performance", quote: "Measure everything. Improve everything.", imageSrc: "/images/gym/NHS Website-17.jpg" },
 ]
 
 export function CoachingTeamSection() {
@@ -38,7 +37,13 @@ export function CoachingTeamSection() {
                             <div key={index} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-8 min-w-0">
                                 <div className="group cursor-default">
                                     {/* Image */}
-                                    <div className={`w-full aspect-[3/4] ${coach.image} mb-8 grayscale group-hover:grayscale-0 transition-all duration-500 rounded-sm relative overflow-hidden`}>
+                                    <div className="w-full aspect-[3/4] mb-8 grayscale group-hover:grayscale-0 transition-all duration-500 rounded-sm relative overflow-hidden">
+                                        <Image
+                                            src={coach.imageSrc}
+                                            alt={coach.name}
+                                            fill
+                                            className="object-cover"
+                                        />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
                                             <Quote className="w-8 h-8 text-white/80" />
                                         </div>

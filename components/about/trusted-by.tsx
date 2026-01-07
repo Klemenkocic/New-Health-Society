@@ -1,10 +1,11 @@
 "use client"
+import Image from "next/image"
 
 const clients = [
-    { title: "CEO", company: "Tech Unicorn", image: "bg-neutral-300" },
-    { title: "Founder", company: "AI Startup", image: "bg-neutral-400" },
-    { title: "CMO", company: "Retail Giant", image: "bg-neutral-500" },
-    { title: "Partner", company: "Global Law Firm", image: "bg-neutral-600" },
+    { title: "CEO", company: "Tech Unicorn", imageSrc: "/images/gym/NHS Website-15.jpg" },
+    { title: "Founder", company: "AI Startup", imageSrc: "/images/gym/NHS Website-25.jpg" },
+    { title: "CMO", company: "Retail Giant", imageSrc: "/images/gym/NHS Website-35.jpg" },
+    { title: "Partner", company: "Global Law Firm", imageSrc: "/images/gym/NHS Website-14.jpg" },
 ]
 
 export function TrustedBySection() {
@@ -18,7 +19,14 @@ export function TrustedBySection() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {clients.map((client, i) => (
                         <div key={i} className="group cursor-default">
-                            <div className={`w-full aspect-[4/5] ${client.image} rounded-sm mb-6 grayscale group-hover:grayscale-0 transition-all duration-500`} />
+                            <div className="w-full aspect-[4/5] rounded-sm mb-6 grayscale group-hover:grayscale-0 transition-all duration-500 relative overflow-hidden">
+                                <Image
+                                    src={client.imageSrc}
+                                    alt={client.title}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
                             <h3 className="font-bold text-lg">{client.title}</h3>
                             <p className="text-sm opacity-60">{client.company}</p>
                         </div>

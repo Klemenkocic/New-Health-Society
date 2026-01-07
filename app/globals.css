@@ -84,5 +84,48 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Glassmorphism Utility */
+.glass-card {
+  background: rgba(243, 240, 229, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(41, 49, 51, 0.05);
+  /* Very subtle dark border for cream bg */
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-small);
+  transition: all var(--transition-standard);
+}
+
+.glass-card:hover {
+  background: rgba(243, 240, 229, 0.85);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+  border-color: rgba(38, 83, 141, 0.1);
+}
+
+/* Background Depth Blobs */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.blob-primary {
+  background-color: rgba(38, 83, 141, 0.08);
+  /* NHS Blue */
+  width: 600px;
+  height: 600px;
+}
+
+.blob-accent {
+  background-color: rgba(240, 255, 255, 0.6);
+  /* Azure */
+  width: 500px;
+  height: 500px;
+}
+
 /* Custom Scrollbar prevention for some animations if needed, 
    but generally keeping native is better unless specified */

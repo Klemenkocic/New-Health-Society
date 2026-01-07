@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
+import Image from "next/image"
 
 const aspects = [
     { id: "strength", title: "Strength", desc: "Foundation of longevity.", color: "bg-stone-200" },
@@ -25,7 +26,7 @@ export function AllHealthAspectsSection() {
             <div className="max-w-7xl mx-auto">
                 <h2 className="font-serif font-bold text-4xl mb-12 text-center">ALL HEALTH ASPECTS</h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {aspects.map((aspect) => (
                         <motion.div
                             key={aspect.id}
@@ -72,8 +73,14 @@ export function AllHealthAspectsSection() {
                                                 <motion.h3 className="font-serif font-bold text-4xl mb-4">{item?.title}</motion.h3>
                                                 <motion.p className="text-xl opacity-80">{item?.desc}</motion.p>
                                             </div>
-                                            <div className="w-full md:w-1/2 bg-black flex items-center justify-center text-white/50">
-                                                [Video/Image Placeholder]
+                                            <div className="w-full md:w-1/2 bg-black flex items-center justify-center text-white/50 relative overflow-hidden">
+                                                <Image
+                                                    src={`/images/gym/NHS Website-${34 + (aspects.indexOf(item || aspects[0]) % 5)}.jpg`}
+                                                    alt={item?.title || "Health Aspect"}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-black/20" />
                                             </div>
                                         </>
                                     )

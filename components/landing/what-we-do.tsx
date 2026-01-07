@@ -57,7 +57,7 @@ export function WhatWeDoSection() {
                             transition={{ duration: 0.8, delay: i * 0.1 }}
                             className={`${feature.span} group relative`}
                         >
-                            <div className={`${feature.height} rounded-3xl bg-white p-8 flex flex-col justify-between shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-transparent hover:border-primary/10 overflow-hidden`}>
+                            <div className={`${feature.height} glass-card p-8 flex flex-col justify-between overflow-hidden group-hover:border-primary/20`}>
 
                                 {/* Hover Gradient Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

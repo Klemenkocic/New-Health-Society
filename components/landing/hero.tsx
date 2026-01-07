@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Hero() {
     return (
@@ -45,22 +46,18 @@ export function Hero() {
 
                 {/* Right Image - Arch Mask */}
                 <div className="col-span-1 lg:col-span-6 relative flex justify-center lg:justify-end">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative w-full max-w-md md:max-w-lg aspect-[3/4]"
-                    >
+                    <div className="relative w-full max-w-md md:max-w-lg aspect-[3/4]">
                         {/* The Arch Mask Container */}
                         <div className="absolute inset-0 bg-neutral-200 rounded-t-[200px] shadow-2xl overflow-hidden">
-                            {/* Placeholder for actual image */}
-                            <div className="w-full h-full bg-neutral-300 relative group">
-                                <div className="absolute inset-0 flex items-center justify-center text-neutral-500 font-mono text-xs z-10">
-                                    [Hero Image: Athlete/Professional]
-                                </div>
-                                {/* Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                            </div>
+                            <Image
+                                src="/images/gym/NHS Website-14.jpg"
+                                alt="NHS Personal Training Studio"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                         </div>
 
                         {/* Floating Badge (Rotating) - Optional "Omnia" vibe element */}
@@ -73,7 +70,7 @@ export function Hero() {
                                 Science <br /> Based <br /> Training
                             </div>
                         </motion.div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 

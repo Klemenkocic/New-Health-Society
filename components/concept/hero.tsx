@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 
 export function ConceptHero() {
     return (
@@ -28,18 +29,16 @@ export function ConceptHero() {
 
                 {/* Bottom Right: CTA & Video Preview */}
                 <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-end gap-6">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="w-full aspect-video bg-neutral-200 rounded-sm overflow-hidden relative group cursor-pointer"
-                    >
-                        <span className="absolute inset-0 flex items-center justify-center text-neutral-500 font-mono text-xs">
-                            [Studio Walkthrough Video]
-                        </span>
-                        {/* Play Button Overlay */}
+                    <div className="w-full aspect-video bg-neutral-200 rounded-sm overflow-hidden relative group cursor-pointer">
+                        <Image
+                            src="/images/gym/NHS Website-35.jpg"
+                            alt="NHS Training Methodology"
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        {/* Overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </motion.div>
+                    </div>
 
                     <Link href="/consultation">
                         <Button size="lg" className="px-8 text-lg h-14">
@@ -48,6 +47,6 @@ export function ConceptHero() {
                     </Link>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

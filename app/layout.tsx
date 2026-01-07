@@ -27,6 +27,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans`}
       >
+        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
+          <div className="bg-blob blob-primary top-[-10%] left-[-10%] animate-pulse" style={{ animationDuration: '8s' }}></div>
+          <div className="bg-blob blob-accent bottom-[-10%] right-[-10%] animate-pulse" style={{ animationDuration: '10s' }}></div>
+          <div className="bg-blob blob-primary top-[40%] right-[20%] opacity-30 animate-pulse" style={{ animationDuration: '12s' }}></div>
+        </div>
         {children}
       </body>
     </html>

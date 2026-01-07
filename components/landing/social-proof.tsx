@@ -162,7 +162,7 @@ export function SocialProofSection() {
                                         transition={{ duration: 0.5 }}
                                         className="h-full"
                                     >
-                                        <div className="bg-[#F3F0E5] p-8 h-full rounded-[var(--radius-md)] border border-foreground/5 flex flex-col justify-between hover:shadow-[var(--shadow-medium)] transition-all duration-300">
+                                        <div className="glass-card p-8 h-full flex flex-col justify-between hover:shadow-[var(--shadow-medium)] transition-all duration-300">
                                             <div>
                                                 <div className="flex gap-1 mb-4 text-primary">
                                                     {[...Array(review.rating || 5)].map((_, i) => (
@@ -189,7 +189,7 @@ export function SocialProofSection() {
                 <div className="md:hidden flex flex-col gap-4">
                     {/* Just show top 3 on mobile stacked or simple overflow */}
                     {allReviews.slice(0, 3).map((review, i) => (
-                        <div key={i} className="bg-[#F3F0E5] p-8 rounded-[var(--radius-md)] border border-foreground/5">
+                        <div key={i} className="glass-card p-8">
                             <div className="flex gap-1 mb-4 text-primary">
                                 {[...Array(review.rating || 5)].map((_, j) => (
                                     <Star key={j} className="w-4 h-4 fill-current" />

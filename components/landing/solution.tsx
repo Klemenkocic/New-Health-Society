@@ -7,27 +7,29 @@ const solutions = [
         id: 1,
         defaultText: "",
         hoverText: "Personalized for you. Your body. Your goals. Your schedule.",
-        image: "bg-neutral-200" // Placeholder for image
+        imageSrc: "/images/gym/NHS Website-41.jpg"
     },
     {
         id: 2,
         defaultText: "",
         hoverText: "3x60 min/week. That's it. No 5x/week nonsense.",
-        image: "bg-neutral-300"
+        imageSrc: "/images/gym/NHS Website-42.jpg"
     },
     {
         id: 3,
         defaultText: "",
         hoverText: "€560/month for group training. Less than you think.",
-        image: "bg-neutral-400"
+        imageSrc: "/images/gym/NHS Website-43.jpg"
     },
     {
         id: 4,
         defaultText: "",
         hoverText: "Every rep tracked. Every measurement recorded. Data-driven progress.",
-        image: "bg-neutral-500"
+        imageSrc: "/images/gym/NHS Website-15.jpg"
     }
 ]
+
+import Image from "next/image"
 
 export function SolutionSection() {
     return (
@@ -36,9 +38,14 @@ export function SolutionSection() {
                 {solutions.map((item) => (
                     <motion.div
                         key={item.id}
-                        className={`relative w-full h-full ${item.image} overflow-hidden group cursor-default`}
+                        className="relative w-full h-full overflow-hidden group cursor-default"
                     >
-                        {/* Actual Image would go here as an <img /> or next/image with object-cover */}
+                        <Image
+                            src={item.imageSrc}
+                            alt={item.hoverText}
+                            fill
+                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 custom-image-position"
+                        />
 
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-12">
@@ -50,11 +57,6 @@ export function SolutionSection() {
                             >
                                 {item.hoverText}
                             </motion.p>
-                        </div>
-
-                        {/* Placeholder Label if no image */}
-                        <div className="absolute bottom-4 left-4 text-xs font-mono text-neutral-500 group-hover:opacity-0 transition-opacity">
-                            [Image Placeholder {item.id}]
                         </div>
                     </motion.div>
                 ))}

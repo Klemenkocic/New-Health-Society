@@ -1,28 +1,57 @@
 "use client"
 
+import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
-// import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const images = [
-    "bg-neutral-800", "bg-neutral-700", "bg-neutral-600", "bg-neutral-500"
+import Autoplay from "embla-carousel-autoplay"
+
+// Specific images requested for the Studio section
+const studioImages = [
+    "/images/gym/NHS Website-16.jpg",
+    "/images/gym/NHS Website-18.jpg",
+    "/images/gym/NHS Website-19.jpg",
+    "/images/gym/NHS Website-20.jpg",
+    "/images/gym/NHS Website-21.jpg",
+    "/images/gym/NHS Website-22.jpg",
+    "/images/gym/NHS Website-23.jpg",
+    "/images/gym/NHS Website-24.jpg",
+    "/images/gym/NHS Website-37.jpg",
+    "/images/gym/NHS Website-38.jpg",
+    "/images/gym/NHS Website-39.jpg",
+    "/images/gym/NHS Website-40.jpg",
 ]
 
 export function GymGallerySection() {
-    const [emblaRef] = useEmblaCarousel({ loop: true })
+    const [emblaRef] = useEmblaCarousel({ loop: true, align: "start" }, [
+        Autoplay({ delay: 3000, stopOnMouseEnter: true })
+    ])
 
     return (
-        <section className="py-24 bg-background">
+        <section className="py-24 bg-background border-t border-foreground/5">
             <div className="max-w-[1920px] mx-auto">
-                <h2 className="font-serif font-bold text-3xl md:text-5xl text-foreground text-center mb-16">
-                    THE STUDIO
-                </h2>
+                <div className="flex flex-col md:flex-row justify-between items-end px-6 md:px-12 mb-16 max-w-7xl mx-auto">
+                    <div>
+                        <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Where We Train</span>
+                        <h2 className="font-serif font-bold text-3xl md:text-5xl text-foreground">
+                            THE STUDIO
+                        </h2>
+                    </div>
+                    <p className="font-serif italic text-xl text-foreground/60 max-w-md mt-4 md:mt-0">
+                        Designed for focus. Built for performance.
+                    </p>
+                </div>
 
-                <div className="overflow-hidden" ref={emblaRef}>
+                <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
                     <div className="flex">
-                        {images.map((img, index) => (
-                            <div key={index} className="flex-[0_0_80%] md:flex-[0_0_60%] px-4 min-w-0">
-                                <div className={`w-full aspect-video ${img} rounded-sm relative flex items-center justify-center`}>
-                                    <span className="text-white/30 font-mono text-xl">STUDIO SHOT {index + 1}</span>
+                        {studioImages.map((src, index) => (
+                            <div key={index} className="flex-[0_0_85%] md:flex-[0_0_45%] lg:flex-[0_0_30%] pl-6 min-w-0">
+                                <div className="w-full aspect-[4/3] relative rounded-sm overflow-hidden select-none">
+                                    <Image
+                                        src={src}
+                                        alt={`NHS Studio Shot ${index + 1}`}
+                                        fill
+                                        className="object-cover hover:scale-105 transition-transform duration-700"
+                                    />
                                 </div>
                             </div>
                         ))}

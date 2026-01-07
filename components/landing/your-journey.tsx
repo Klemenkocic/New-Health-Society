@@ -3,6 +3,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion"
+import Image from "next/image"
 
 
 const steps = [
@@ -84,7 +85,7 @@ function Card({ step, index, total }: { step: typeof steps[0]; index: number; to
                 zIndex: index
             }}
         >
-            <div className="relative w-full rounded-[32px] overflow-hidden border border-neutral-200 bg-white shadow-xl flex flex-col md:flex-row group transition-all duration-500 hover:shadow-2xl">
+            <div className="glass-card relative w-full overflow-hidden flex flex-col md:flex-row group transition-all duration-500 hover:shadow-2xl">
 
                 {/* Content - Left */}
                 <div className="relative z-10 flex-1 p-8 md:p-12 flex flex-col justify-center">
@@ -101,13 +102,16 @@ function Card({ step, index, total }: { step: typeof steps[0]; index: number; to
                 </div>
 
                 {/* Visual - Right (Image Placeholder with Arch Mask or Simple minimalist block) */}
-                <div className="relative z-10 flex-1 bg-[#F9F9F9] hidden md:flex items-center justify-center p-8 overflow-hidden">
-                    <div className="w-full h-full rounded-2xl bg-neutral-100 relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700">
-                        <div className="absolute inset-0 flex items-center justify-center text-neutral-400 font-mono text-xs">
-                            [Image: {step.title}]
-                        </div>
-                        {/* Arch Mask Overlay idea */}
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100px] pointer-events-none"></div>
+                <div className="relative z-10 flex-1 hidden md:flex items-center justify-center p-8 overflow-hidden">
+                    <div className="w-full h-full rounded-2xl relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700">
+                        <Image
+                            src={`/images/gym/NHS Website-${25 + index}.jpg`}
+                            alt={step.title}
+                            fill
+                            className="object-cover"
+                        />
+                        {/* Arch Mask Overlay idea - keeping simple for now or adjusting */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-[100px] pointer-events-none z-10 mix-blend-multiply"></div>
                     </div>
                 </div>
             </div>
