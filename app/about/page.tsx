@@ -29,11 +29,6 @@ export default function AboutPage() {
              Or just stack them. Stacking is safer for long content.
          */}
             </div>
-
-            {/* Re-rendering them properly stacked as full sections */}
-            <PrinciplesSection />
-            <ValuesSection />
-
             <CoachingTeamSection />
             <TrustedBySection />
             <CareersSection />

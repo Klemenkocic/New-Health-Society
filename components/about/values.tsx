@@ -30,7 +30,7 @@ export function ValuesSection() {
                             <div key={v.id} className="group border-b border-foreground/5 pb-2">
                                 <button
                                     onClick={() => toggle(v.id)}
-                                    className="flex items-center gap-4 w-full text-left py-4 hover:bg-neutral-50 rounded-sm transition-colors px-2 -ml-2"
+                                    className="flex items-center gap-4 w-full text-left py-4 hover:bg-neutral-50 rounded-[var(--radius-md)] transition-all duration-200 ease-in-out px-2 -ml-2 hover:shadow-[var(--shadow-small)] hover:-translate-y-[2px]"
                                 >
                                     <motion.div
                                         animate={{ rotate: isOpen ? 90 : 0 }}

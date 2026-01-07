@@ -40,11 +40,11 @@ export function Navbar() {
     return (
         <motion.nav
             animate={{
-                backgroundColor: shouldShowNavbar ? "rgba(243, 240, 229, 0.95)" : "rgba(243, 240, 229, 0)",
+                backgroundColor: shouldShowNavbar ? "rgba(243, 240, 229, 0.7)" : "rgba(243, 240, 229, 0)",
                 borderColor: shouldShowNavbar ? "rgba(41, 49, 51, 0.05)" : "rgba(41, 49, 51, 0)"
             }}
             transition={{ duration: 0.5 }}
-            className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 backdrop-blur-[2px] border-b"
+            className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 backdrop-blur-[10px] border-b"
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* Left Links */}

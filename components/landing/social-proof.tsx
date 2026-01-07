@@ -51,7 +51,7 @@ export function SocialProofSection() {
                     <div className="flex -ml-4">
                         {reviews.map((review) => (
                             <div key={review.id} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4 min-w-0">
-                                <div className="bg-[#F3F0E5] p-8 h-full rounded-sm border border-foreground/5 flex flex-col justify-between hover:shadow-md transition-shadow">
+                                <div className="bg-[#F3F0E5] p-8 h-full rounded-[var(--radius-md)] border border-foreground/5 flex flex-col justify-between hover:shadow-[var(--shadow-medium)] hover:-translate-y-1 transition-all duration-300">
                                     <div>
                                         <div className="flex gap-1 mb-4 text-primary">
                                             {[...Array(review.rating)].map((_, i) => (

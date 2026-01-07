@@ -66,7 +66,8 @@ export function QuizEngine() {
     const progress = ((currentQuestionIndex + 1) / questions.length) * 100
 
     return (
-        <div className="w-full max-w-2xl mx-auto bg-white rounded-sm shadow-xl p-8 md:p-12 min-h-[500px] flex flex-col justify-center border border-foreground/5">
+        <div className="w-full max-w-2xl mx-auto bg-white rounded-[var(--radius-xl)] shadow-[var(--shadow-large)] p-8 md:p-12 min-h-[500px] flex flex-col justify-center border border-foreground/5 relative overflow-hidden">
+            {/* Background texture or gradient could be added here for extra premium feel */}
             <AnimatePresence mode="wait">
 
                 {/* INTRO */}
@@ -164,7 +165,7 @@ export function QuizEngine() {
                             placeholder="your@email.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-4 border border-foreground/20 rounded-sm mb-6 focus:outline-none focus:border-primary text-lg"
+                            className="w-full p-4 border border-foreground/20 rounded-[var(--radius-md)] mb-6 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-lg transition-all duration-200"
                         />
 
                         <Button onClick={() => setStep("results")} disabled={!email} size="lg" className="w-full h-14 text-lg">

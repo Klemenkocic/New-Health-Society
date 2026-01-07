@@ -30,7 +30,7 @@ export function PrinciplesSection() {
                             <div key={p.id} className="group">
                                 <button
                                     onClick={() => toggle(p.id)}
-                                    className="flex items-center gap-4 w-full text-left py-2 hover:bg-neutral-100 rounded-sm transition-colors px-2 -ml-2"
+                                    className="flex items-center gap-4 w-full text-left py-2 hover:bg-neutral-100/50 rounded-[var(--radius-md)] transition-colors duration-200 ease-in-out px-2 -ml-2 hover:shadow-[var(--shadow-subtle)]"
                                 >
                                     <motion.div
                                         animate={{ rotate: isOpen ? 90 : 0 }}
