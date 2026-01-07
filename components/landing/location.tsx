@@ -1,20 +1,136 @@
 "use client"
 
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api"
+import { useMemo } from "react"
+
+const libraries: ("places")[] = ["places"]
 
 export function LocationSection() {
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
+        libraries: libraries
+    })
+
+    const center = useMemo(() => ({
+        lat: 48.18824,
+        lng: 11.60187
+    }), [])
+
+    const mapOptions = useMemo(() => ({
+        disableDefaultUI: true,
+        clickableIcons: false,
+        scrollwheel: false,
+        zoomControl: true,
+        styles: [
+            {
+                "elementType": "geometry",
+                "stylers": [{ "color": "#f5f5f5" }]
+            },
+            {
+                "elementType": "labels.icon",
+                "stylers": [{ "visibility": "off" }]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#616161" }]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [{ "color": "#f5f5f5" }]
+            },
+            {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#bdbdbd" }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#eeeeee" }]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#757575" }]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#e5e5e5" }]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#9e9e9e" }]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#ffffff" }]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#757575" }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#dadada" }]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#616161" }]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#9e9e9e" }]
+            },
+            {
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#e5e5e5" }]
+            },
+            {
+                "featureType": "transit.station",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#eeeeee" }]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [{ "color": "#c9c9c9" }]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [{ "color": "#9e9e9e" }]
+            }
+        ]
+    }), [])
+
     return (
         <section className="py-0 relative h-[600px] w-full bg-neutral-100 flex flex-col md:flex-row">
             {/* Map Side (Left) */}
-            <div className="w-full md:w-1/2 h-full bg-neutral-300 relative group overflow-hidden">
-                {/* Google Map Embed would go here. Using Image/Div placeholder. */}
-                <div className="absolute inset-0 bg-neutral-400 group-hover:brightness-110 transition-all duration-500 cursor-grab active:cursor-grabbing flex items-center justify-center text-neutral-600 font-mono">
-                    [Google Map Embed: Munich, Schwabing]
-                </div>
-                {/* Overlay for map interaction hint */}
-                <div className="absolute top-4 left-4 bg-white/80 px-4 py-2 text-xs font-bold rounded-sm shadow-sm backdrop-blur-sm">
-                    INTERACTIVE MAP
-                </div>
+            <div className="w-full md:w-1/2 h-full bg-neutral-900 relative group overflow-hidden">
+                {isLoaded ? (
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '100%' }}
+                        center={center}
+                        zoom={15}
+                        options={mapOptions}
+                    >
+                        <Marker position={center} />
+                    </GoogleMap>
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center text-neutral-500">
+                        Loading Map...
+                    </div>
+                )}
             </div>
 
             {/* Info Side (Right) */}

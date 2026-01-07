@@ -75,6 +75,7 @@
 
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -84,48 +85,95 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Glassmorphism Utility */
-.glass-card {
-  background: rgba(243, 240, 229, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(41, 49, 51, 0.05);
-  /* Very subtle dark border for cream bg */
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-small);
-  transition: all var(--transition-standard);
+/* 
+  -----------------------------------------
+  LIQUID GLASS CARD IMPLEMENTATION 
+  -----------------------------------------
+*/
+
+/* 
+  -----------------------------------------
+  LIQUID GLASS CARD IMPLEMENTATION (Ref: Snipzy)
+  -----------------------------------------
+*/
+
+.liquid-card {
+  --bg-color: rgba(255, 255, 255, 0.25);
+  --highlight: rgba(255, 255, 255, 0.75);
+  --text: #293133;
+  /* NHS Foreground */
+
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  /* Softer shadow for light theme */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
 }
 
-.glass-card:hover {
-  background: rgba(243, 240, 229, 0.85);
-  box-shadow: var(--shadow-medium);
-  transform: translateY(-2px);
-  border-color: rgba(38, 83, 141, 0.1);
+.liquid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Background Depth Blobs */
-.bg-blob {
+.glass-filter,
+.glass-overlay,
+.glass-specular {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.6;
-  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
   pointer-events: none;
 }
 
-.blob-primary {
-  background-color: rgba(38, 83, 141, 0.08);
-  /* NHS Blue */
-  width: 600px;
-  height: 600px;
+.glass-filter {
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  /* This ID must match the SVG in the component */
+  filter: url(#glass-distortion) saturate(120%) brightness(1.15);
 }
 
-.blob-accent {
-  background-color: rgba(240, 255, 255, 0.6);
-  /* Azure */
-  width: 500px;
-  height: 500px;
+.glass-distortion-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 80%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
+  background-size: 300% 300%;
+  animation: floatDistort 10s infinite ease-in-out;
+  mix-blend-mode: overlay;
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* Custom Scrollbar prevention for some animations if needed, 
-   but generally keeping native is better unless specified */
+@keyframes floatDistort {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.glass-overlay {
+  z-index: 2;
+  background: var(--bg-color);
+}
+
+.glass-specular {
+  z-index: 3;
+  box-shadow: inset 1px 1px 1px var(--highlight);
+  transition: background 0.1s;
+}
+
+.glass-content {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  color: var(--text);
+}
