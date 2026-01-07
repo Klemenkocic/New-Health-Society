@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Instagram, Linkedin, Mail } from "lucide-react"
 
 export function Footer() {
@@ -40,7 +41,14 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row justify-between items-center text-xs text-foreground/60 pt-8 border-t border-foreground/5">
-                    <div className="font-bold text-lg text-foreground mb-4 md:mb-0">NHS</div>
+                    <div className="relative w-16 h-8 md:w-20 md:h-10 mb-4 md:mb-0 opacity-80 hover:opacity-100 transition-opacity">
+                        <Image
+                            src="/images/nhs-asset-1.png"
+                            alt="NHS Asset Logo"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
 
                     <div className="flex gap-6">
                         <Link href="#" className="hover:text-primary">Imprint</Link>

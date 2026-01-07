@@ -2,11 +2,17 @@
 
 :root {
   /* NHS Brand Colors */
-  --background: #F3F0E5;    /* Soft Off-White */
-  --foreground: #293133;    /* Deep Charcoal (Text) */
-  --primary: #26538D;       /* Deep Professional Blue */
-  --accent: #F0FFFF;        /* Azure Detail (Light Blue) */
-  
+  --background: #F3F0E5;
+  /* Soft Off-White */
+  --foreground: #293133;
+  /* Deep Charcoal (Text) */
+  --primary: #26538D;
+  /* Deep Professional Blue */
+  --primary-dark: #1E4270;
+  /* Darker Blue for hover states */
+  --accent: #F0FFFF;
+  /* Azure Detail (Light Blue) */
+
   --font-inter: "Inter", sans-serif;
   --font-playfair: "Playfair Display", serif;
 
@@ -30,8 +36,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
   --color-accent: var(--accent);
-  
+
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 
@@ -54,6 +61,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -61,8 +69,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 body {
