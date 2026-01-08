@@ -1,81 +1,155 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
+import { Marquee } from "@/components/ui/marquee"
+import { IntroAnimation } from "@/components/landing/intro-animation"
+
+const heroImages = [
+    `${basePath}/images/gym/NHS Website-14.jpg`,
+    `${basePath}/images/gym/NHS Website-25.jpg`,
+    `${basePath}/images/gym/NHS Website-35.jpg`,
+]
 
 export function Hero() {
+    const [introComplete, setIntroComplete] = useState(false)
+    const { scrollY } = useScroll()
+
+    // Parallax effect for the right column images
+    const y1 = useTransform(scrollY, [0, 1000], [0, -150])
+    const y2 = useTransform(scrollY, [0, 1000], [0, -300])
+
     return (
-        <section className="relative min-h-[90vh] w-full bg-[#F3F0E5] flex flex-col justify-center px-6 md:px-12 py-20 overflow-hidden">
-            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section className="relative min-h-screen w-full bg-[#F3F0E5] text-[#293133] overflow-hidden">
+            {/* Intro Animation Overlay */}
+            <AnimatePresence>
+                {!introComplete && (
+                    <IntroAnimation onComplete={() => setIntroComplete(true)} />
+                )}
+            </AnimatePresence>
 
-                {/* Left Content */}
-                <div className="col-span-1 lg:col-span-6 z-10 relative">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <h1 className="font-sans font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-foreground mb-8">
-                            NEW HEALTH <br />
-                            <span className="font-serif italic font-light text-6xl md:text-8xl lg:text-9xl text-primary">Society</span>
-                        </h1>
+            <div className="max-w-[1920px] mx-auto px-6 md:px-12 pt-32 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 min-h-screen">
 
-                        <div className="w-16 h-1 bg-primary mb-8 ml-1"></div>
+                {/* Left Column: Fixed Content */}
+                <div className="col-span-1 lg:col-span-5 flex flex-col justify-between h-full relative z-10">
+                    <div>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 20 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="font-serif italic text-3xl md:text-4xl mb-8"
+                        >
+                            Refining the human engine.
+                        </motion.h2>
 
-                        <p className="font-sans text-foreground/80 text-lg md:text-xl max-w-md leading-relaxed mb-10 ml-1">
-                            Use science to build your body. <br />
-                            <span className="text-primary font-medium">3 hours/week. Measurable results.</span>
-                        </p>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: introComplete ? 1 : 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="font-sans text-lg md:text-xl max-w-sm leading-relaxed opacity-80 mb-12"
+                        >
+                            We combine clinical precision with high-performance coaching.
+                            Three hours per week. Data-driven results.
+                        </motion.p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 ml-1">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: introComplete ? 1 : 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                        >
                             <Link href="/consultation">
-                                <Button className="rounded-full px-8 py-6 text-sm uppercase tracking-widest bg-primary hover:bg-primary-dark shadow-sm hover:shadow-md transition-all">
+                                <Button className="rounded-full px-10 py-7 text-sm uppercase tracking-widest bg-[#293133] text-[#F3F0E5] hover:bg-[#293133]/90">
                                     Start Your Journey
                                 </Button>
                             </Link>
-                            <Link href="/concept">
-                                <Button variant="outline" className="rounded-full px-8 py-6 text-sm uppercase tracking-widest border-primary text-primary hover:bg-primary/5">
-                                    Our Method
-                                </Button>
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* Right Image - Arch Mask */}
-                <div className="col-span-1 lg:col-span-6 relative flex justify-center lg:justify-end">
-                    <div className="relative w-full max-w-md md:max-w-lg aspect-[3/4]">
-                        {/* The Arch Mask Container */}
-                        <div className="absolute inset-0 bg-neutral-200 rounded-t-[200px] shadow-2xl overflow-hidden">
-                            <Image
-                                src="/images/gym/NHS Website-14.jpg"
-                                alt="NHS Personal Training Studio"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        </div>
-
-                        {/* Floating Badge (Rotating) - Optional "Omnia" vibe element */}
-                        <motion.div
-                            className="absolute -bottom-8 -left-8 w-32 h-32 md:w-40 md:h-40 bg-accent rounded-full flex items-center justify-center shadow-lg z-20 hidden md:flex"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        >
-                            <div className="text-[10px] font-mono text-primary uppercase tracking-widest text-center leading-relaxed">
-                                Science <br /> Based <br /> Training
-                            </div>
                         </motion.div>
                     </div>
+
+                    {/* Bottom of Left Column: The "Landing" spot for the large text */}
+                    <div className="mt-24 lg:mt-auto pt-12 relative z-20">
+                        <div className="lg:absolute lg:bottom-12 lg:left-12 lg:w-full pointer-events-none flex flex-col items-start gap-[1vw] leading-[0.8] font-serif font-bold text-[12vw] tracking-tighter">
+                            {/* Only render these when intro is complete to trigger the layoutId transition from IntroAnimation */}
+                            {introComplete && (
+                                <>
+                                    <motion.div layoutId="word-new-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
+                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                            NEW
+                                        </span>
+                                    </motion.div>
+                                    <motion.div layoutId="word-health-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
+                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                            HEALTH
+                                        </span>
+                                    </motion.div>
+                                    <motion.div layoutId="word-society-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
+                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                            SOCIETY
+                                        </span>
+                                    </motion.div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Column: Parallax Images */}
+                <div className="col-span-1 lg:col-span-7 relative h-[60vh] lg:h-auto min-h-[800px]">
+                    {/* Image 1: Background / Base */}
+                    <motion.div
+                        style={{ y: y1 }}
+                        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                        animate={{
+                            opacity: introComplete ? 1 : 0,
+                            y: introComplete ? 0 : 20,
+                            scale: introComplete ? 1 : 0.98
+                        }}
+                        transition={{ duration: 1.0, ease: "easeOut", delay: 0 }}
+                        className="absolute top-0 right-0 w-[80%] aspect-[3/4] overflow-hidden rounded-sm"
+                    >
+                        <Image
+                            src={heroImages[0]}
+                            alt="NHS Studio"
+                            fill
+                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                            priority
+                        />
+                    </motion.div>
+
+                    {/* Image 2: Overlay / Faster Parallax */}
+                    <motion.div
+                        style={{ y: y2 }}
+                        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                        animate={{
+                            opacity: introComplete ? 1 : 0,
+                            y: introComplete ? 0 : 40,
+                            scale: introComplete ? 1 : 0.95
+                        }}
+                        transition={{ duration: 1.0, ease: "easeOut", delay: 1.3 }}
+                        className="absolute bottom-24 left-0 w-[50%] aspect-[4/5] overflow-hidden rounded-sm shadow-2xl z-20"
+                    >
+                        <Image
+                            src={heroImages[1]}
+                            alt="NHS Training"
+                            fill
+                            className="object-cover"
+                        />
+                    </motion.div>
                 </div>
             </div>
 
-            {/* Background Decor - Subtle blob */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-0 pointer-events-none"></div>
+            {/* Marquee at the very bottom */}
+            <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-[#293133]/10 bg-[#F3F0E5]">
+                <Marquee className="py-4 opacity-60 mix-blend-darken" repeat={4}>
+                    <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Science Based Training</span>
+                    <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Clinical Precision</span>
+                    <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Measurable Results</span>
+                    <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Private Atmosphere</span>
+                </Marquee>
+            </div>
         </section>
     )
 }

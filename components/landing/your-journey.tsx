@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
 
 const steps = [
     {
@@ -124,7 +125,7 @@ function TimelineCard({ step, index, isEven }: { step: typeof steps[0]; index: n
                     transition={{ duration: 0.3 }}
                 >
                     <Image
-                        src={`/images/gym/NHS Website-${25 + index}.jpg`}
+                        src={`${basePath}/images/gym/NHS Website-${25 + index}.jpg`}
                         alt={step.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

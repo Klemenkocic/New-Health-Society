@@ -4,21 +4,22 @@ import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
 
 import Autoplay from "embla-carousel-autoplay"
+import { basePath } from "@/lib/utils"
 
 // Specific images requested for the Studio section
 const studioImages = [
-    "/images/gym/NHS Website-16.jpg",
-    "/images/gym/NHS Website-18.jpg",
-    "/images/gym/NHS Website-19.jpg",
-    "/images/gym/NHS Website-20.jpg",
-    "/images/gym/NHS Website-21.jpg",
-    "/images/gym/NHS Website-22.jpg",
-    "/images/gym/NHS Website-23.jpg",
-    "/images/gym/NHS Website-24.jpg",
-    "/images/gym/NHS Website-37.jpg",
-    "/images/gym/NHS Website-38.jpg",
-    "/images/gym/NHS Website-39.jpg",
-    "/images/gym/NHS Website-40.jpg",
+    `${basePath}/images/gym/NHS Website-16.jpg`,
+    `${basePath}/images/gym/NHS Website-18.jpg`,
+    `${basePath}/images/gym/NHS Website-19.jpg`,
+    `${basePath}/images/gym/NHS Website-20.jpg`,
+    `${basePath}/images/gym/NHS Website-21.jpg`,
+    `${basePath}/images/gym/NHS Website-22.jpg`,
+    `${basePath}/images/gym/NHS Website-23.jpg`,
+    `${basePath}/images/gym/NHS Website-24.jpg`,
+    `${basePath}/images/gym/NHS Website-37.jpg`,
+    `${basePath}/images/gym/NHS Website-38.jpg`,
+    `${basePath}/images/gym/NHS Website-39.jpg`,
+    `${basePath}/images/gym/NHS Website-40.jpg`,
 ]
 
 export function GymGallerySection() {

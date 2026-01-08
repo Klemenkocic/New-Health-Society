@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { basePath } from "@/lib/utils"
 
 const models = [
 
@@ -11,19 +12,19 @@ const models = [
         id: "coaching",
         title: "COACHING",
         desc: "The foundation. We audit your lifestyle, nutrition, and recovery. Then we build the plan.",
-        imageSrc: "/images/gym/NHS Website-31.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-31.jpg`
     },
     {
         id: "group",
         title: "SMALL GROUP",
         desc: "Maximum 10 people. Individual programs. The energy of a team, the precision of a private session.",
-        imageSrc: "/images/gym/NHS Website-32.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-32.jpg`
     },
     {
         id: "personal",
         title: "PERSONAL TRAINING",
         desc: "100% attention. For rehabilitation, specific athletic goals, or maximum efficiency.",
-        imageSrc: "/images/gym/NHS Website-33.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-33.jpg`
     }
 ]
 

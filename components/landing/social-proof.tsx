@@ -5,22 +5,23 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Star } from "lucide-react"
 import Image from "next/image"
 import { useJsApiLoader } from "@react-google-maps/api"
+import { basePath } from "@/lib/utils"
 
 const libraries: ("places")[] = ["places"]
 
 const logos = [
-    { name: "Aesop", src: "/images/clients/Aesop.png" },
-    { name: "Atlantis", src: "/images/clients/Atlantis.png" },
-    { name: "Autodoc", src: "/images/clients/Autodoc.png" },
-    { name: "BMW", src: "/images/clients/Bmw.png" },
-    { name: "Boehmler", src: "/images/clients/Boehmler.png" },
-    { name: "Dyson", src: "/images/clients/Dyson.png" },
-    { name: "Elfbau", src: "/images/clients/Elfbau.png" },
-    { name: "HV", src: "/images/clients/HV.png" },
-    { name: "Lului", src: "/images/clients/Lului.png" },
-    { name: "Sky", src: "/images/clients/Sky.png" },
-    { name: "VAseven", src: "/images/clients/VAseven.png" },
-    { name: "Werkhaus", src: "/images/clients/Werkhaus.png" },
+    { name: "Aesop", src: `${basePath}/images/clients/Aesop.png` },
+    { name: "Atlantis", src: `${basePath}/images/clients/Atlantis.png` },
+    { name: "Autodoc", src: `${basePath}/images/clients/Autodoc.png` },
+    { name: "BMW", src: `${basePath}/images/clients/Bmw.png` },
+    { name: "Boehmler", src: `${basePath}/images/clients/Boehmler.png` },
+    { name: "Dyson", src: `${basePath}/images/clients/Dyson.png` },
+    { name: "Elfbau", src: `${basePath}/images/clients/Elfbau.png` },
+    { name: "HV", src: `${basePath}/images/clients/HV.png` },
+    { name: "Lului", src: `${basePath}/images/clients/Lului.png` },
+    { name: "Sky", src: `${basePath}/images/clients/Sky.png` },
+    { name: "VAseven", src: `${basePath}/images/clients/VAseven.png` },
+    { name: "Werkhaus", src: `${basePath}/images/clients/Werkhaus.png` },
 ]
 
 // Fallback reviews

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
 
 const aspects = [
     { id: "strength", title: "Strength", desc: "Foundation of longevity.", color: "bg-stone-200" },
@@ -75,7 +76,7 @@ export function AllHealthAspectsSection() {
                                             </div>
                                             <div className="w-full md:w-1/2 bg-black flex items-center justify-center text-white/50 relative overflow-hidden">
                                                 <Image
-                                                    src={`/images/gym/NHS Website-${34 + (aspects.indexOf(item || aspects[0]) % 5)}.jpg`}
+                                                    src={`${basePath}/images/gym/NHS Website-${34 + (aspects.indexOf(item || aspects[0]) % 5)}.jpg`}
                                                     alt={item?.title || "Health Aspect"}
                                                     fill
                                                     className="object-cover"

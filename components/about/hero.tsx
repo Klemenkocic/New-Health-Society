@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
 
 export function AboutHero() {
     return (
@@ -36,7 +37,7 @@ export function AboutHero() {
                 <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-end gap-6">
                     <div className="w-full aspect-video bg-neutral-200 rounded-sm overflow-hidden relative group cursor-pointer">
                         <Image
-                            src="/images/gym/NHS Website-30.jpg"
+                            src={`${basePath}/images/gym/NHS Website-30.jpg`}
                             alt="NHS Team in Action"
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"

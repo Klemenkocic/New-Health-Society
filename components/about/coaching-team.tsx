@@ -4,10 +4,11 @@ import useEmblaCarousel from "embla-carousel-react"
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react"
 import Image from "next/image"
 import { useCallback } from "react"
+import { basePath } from "@/lib/utils"
 
 const coaches = [
-    { name: "Alex S.", role: "Head Coach", quote: "Excellence is not an act, but a habit.", imageSrc: "/images/gym/NHS Website-36.jpg" },
-    { name: "Klemen K.", role: "Head of Performance", quote: "Measure everything. Improve everything.", imageSrc: "/images/gym/NHS Website-17.jpg" },
+    { name: "Alex S.", role: "Head Coach", quote: "Excellence is not an act, but a habit.", imageSrc: `${basePath}/images/gym/NHS Website-36.jpg` },
+    { name: "Klemen K.", role: "Head of Performance", quote: "Measure everything. Improve everything.", imageSrc: `${basePath}/images/gym/NHS Website-17.jpg` },
 ]
 
 export function CoachingTeamSection() {

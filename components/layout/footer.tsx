@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Instagram, Linkedin, Mail } from "lucide-react"
+import { basePath } from "@/lib/utils"
 
 export function Footer() {
     return (
@@ -43,7 +44,7 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center text-xs text-foreground/60 pt-8 border-t border-foreground/5">
                     <div className="relative w-16 h-8 md:w-20 md:h-10 mb-4 md:mb-0 opacity-80 hover:opacity-100 transition-opacity">
                         <Image
-                            src="/images/nhs-asset-1.png"
+                            src={`${basePath}/images/nhs-asset-1.png`}
                             alt="NHS Asset Logo"
                             fill
                             className="object-contain"

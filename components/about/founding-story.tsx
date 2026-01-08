@@ -3,13 +3,14 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
 
 const slides = [
-    { year: "2014", title: "The Beginning", desc: "It started in a garage. No fancy equipment. Just a obsession with mechanics.", imageSrc: "/images/gym/NHS Website-26.jpg" },
-    { year: "2016", title: "First Location", desc: "We moved to Schwabing. 200sqm. The community started to grow.", imageSrc: "/images/gym/NHS Website-27.jpg" },
-    { year: "2018", title: "The Method", desc: "We codified our approach. Data became the driver. Guesswork was eliminated.", imageSrc: "/images/gym/NHS Website-28.jpg" },
-    { year: "2021", title: "Expansion", desc: "600sqm. State of the art diagnostics. The vision became reality.", imageSrc: "/images/gym/NHS Website-29.jpg" },
-    { year: "2024", title: "The New Standard", desc: "We are not just a gym. We are a health optimization center.", imageSrc: "/images/gym/NHS Website-30.jpg" },
+    { year: "2014", title: "The Beginning", desc: "It started in a garage. No fancy equipment. Just a obsession with mechanics.", imageSrc: `${basePath}/images/gym/NHS Website-26.jpg` },
+    { year: "2016", title: "First Location", desc: "We moved to Schwabing. 200sqm. The community started to grow.", imageSrc: `${basePath}/images/gym/NHS Website-27.jpg` },
+    { year: "2018", title: "The Method", desc: "We codified our approach. Data became the driver. Guesswork was eliminated.", imageSrc: `${basePath}/images/gym/NHS Website-28.jpg` },
+    { year: "2021", title: "Expansion", desc: "600sqm. State of the art diagnostics. The vision became reality.", imageSrc: `${basePath}/images/gym/NHS Website-29.jpg` },
+    { year: "2024", title: "The New Standard", desc: "We are not just a gym. We are a health optimization center.", imageSrc: `${basePath}/images/gym/NHS Website-30.jpg` },
 ]
 
 export function FoundingStorySection() {

@@ -1,31 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { basePath } from "@/lib/utils"
 
 const solutions = [
     {
         id: 1,
         defaultText: "",
         hoverText: "Personalized for you. Your body. Your goals. Your schedule.",
-        imageSrc: "/images/gym/NHS Website-41.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-41.jpg`
     },
     {
         id: 2,
         defaultText: "",
         hoverText: "3x60 min/week. That's it. No 5x/week nonsense.",
-        imageSrc: "/images/gym/NHS Website-42.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-42.jpg`
     },
     {
         id: 3,
         defaultText: "",
         hoverText: "€560/month for group training. Less than you think.",
-        imageSrc: "/images/gym/NHS Website-43.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-43.jpg`
     },
     {
         id: 4,
         defaultText: "",
         hoverText: "Every rep tracked. Every measurement recorded. Data-driven progress.",
-        imageSrc: "/images/gym/NHS Website-15.jpg"
+        imageSrc: `${basePath}/images/gym/NHS Website-15.jpg`
     }
 ]
 

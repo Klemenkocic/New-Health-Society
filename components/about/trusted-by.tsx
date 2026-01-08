@@ -1,11 +1,12 @@
 "use client"
 import Image from "next/image"
+import { basePath } from "@/lib/utils"
 
 const clients = [
-    { title: "CEO", company: "Tech Unicorn", imageSrc: "/images/gym/NHS Website-15.jpg" },
-    { title: "Founder", company: "AI Startup", imageSrc: "/images/gym/NHS Website-25.jpg" },
-    { title: "CMO", company: "Retail Giant", imageSrc: "/images/gym/NHS Website-35.jpg" },
-    { title: "Partner", company: "Global Law Firm", imageSrc: "/images/gym/NHS Website-14.jpg" },
+    { title: "CEO", company: "Tech Unicorn", imageSrc: `${basePath}/images/gym/NHS Website-15.jpg` },
+    { title: "Founder", company: "AI Startup", imageSrc: `${basePath}/images/gym/NHS Website-25.jpg` },
+    { title: "CMO", company: "Retail Giant", imageSrc: `${basePath}/images/gym/NHS Website-35.jpg` },
+    { title: "Partner", company: "Global Law Firm", imageSrc: `${basePath}/images/gym/NHS Website-14.jpg` },
 ]
 
 export function TrustedBySection() {
