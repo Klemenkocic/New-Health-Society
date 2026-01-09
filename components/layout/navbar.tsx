@@ -17,7 +17,7 @@ export function Navbar() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 mix-blend-difference text-[#F3F0E5]"
+            className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 text-[#293133]"
         >
             <div className="max-w-[1920px] mx-auto flex items-start justify-between">
                 {/* Left: Brand / Home Link */}
@@ -27,12 +27,12 @@ export function Navbar() {
                         alt="New Health Society"
                         width={180}
                         height={40}
-                        className="h-10 w-auto object-contain invert brightness-0"
+                        className="h-10 w-auto object-contain"
                     />
                 </Link>
 
                 {/* Center: Navigation (Desktop) */}
-                <div className="hidden md:flex gap-8 items-center bg-black/20 backdrop-blur-xl px-6 py-2 rounded-2xl border border-white/20 shadow-sm">
+                <div className="hidden md:flex gap-8 items-center bg-[#F3F0E5]/40 backdrop-blur-md px-6 py-2 rounded-2xl border border-[#293133]/10 shadow-sm">
                     <Link href="/about" className="text-sm font-medium hover:opacity-70 transition-opacity">About</Link>
                     <Link href="/concept" className="text-sm font-medium hover:opacity-70 transition-opacity">Concept</Link>
                     <Link href="/braverman" className="text-sm font-medium hover:opacity-70 transition-opacity">Test</Link>
