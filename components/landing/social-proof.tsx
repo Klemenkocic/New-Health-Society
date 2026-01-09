@@ -144,9 +144,9 @@ export function SocialProofSection() {
     return (
         <section className="py-24 px-6 md:px-12 bg-background border-t border-foreground/5">
             <div className="max-w-7xl mx-auto">
-                <h2 className="font-serif font-bold text-3xl md:text-4xl text-foreground mb-16 text-center">
-                    TRUSTED BY
-                </h2>
+                <div className="mb-16 border-b border-foreground/10 pb-8">
+                    <h2 className="font-serif text-5xl md:text-7xl text-foreground">Trusted By</h2>
+                </div>
 
                 {/* Animated Grid */}
                 <div className="hidden md:grid grid-cols-3 gap-6">
@@ -170,7 +170,7 @@ export function SocialProofSection() {
                                                         <Star key={i} className="w-4 h-4 fill-current" />
                                                     ))}
                                                 </div>
-                                                <p className="font-serif italic text-lg text-foreground mb-6 line-clamp-6">
+                                                <p className="font-serif italic text-2xl text-foreground mb-6 line-clamp-6 leading-relaxed">
                                                     "{review.text}"
                                                 </p>
                                             </div>
@@ -196,7 +196,7 @@ export function SocialProofSection() {
                                     <Star key={j} className="w-4 h-4 fill-current" />
                                 ))}
                             </div>
-                            <p className="font-serif italic text-lg text-foreground mb-4">
+                            <p className="font-serif italic text-xl text-foreground mb-4 leading-relaxed">
                                 "{review.text}"
                             </p>
                             <div className="font-bold text-sm text-foreground">{review.author_name || review.name}</div>

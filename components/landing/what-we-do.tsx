@@ -86,14 +86,16 @@ export function WhatWeDoSection() {
     return (
         <section className="py-32 px-6 bg-[#F3F0E5] overflow-hidden min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto text-center relative w-full">
-                <motion.h2
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="font-serif font-bold text-lg tracking-widest text-primary mb-16 relative z-30 uppercase"
-                >
-                    All Health Aspects
-                </motion.h2>
+                <div className="mb-24 flex items-end justify-between border-b border-[#293133]/10 pb-8">
+                    <motion.h2
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="font-serif text-5xl md:text-7xl text-[#293133] relative z-30"
+                    >
+                        All Health Aspects
+                    </motion.h2>
+                </div>
 
                 {/* Scattered Cloud Layout */}
                 <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-6xl mx-auto mb-24 relative z-20">
@@ -102,17 +104,7 @@ export function WhatWeDoSection() {
                     ))}
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    viewport={{ once: true }}
-                    className="relative z-30"
-                >
-                    <p className="font-serif italic text-2xl text-foreground">
-                        "From ultra marathon prep to PR deadlifts. We cover it all."
-                    </p>
-                </motion.div>
+                <div className="mb-24"></div>
             </div>
         </section>
     )

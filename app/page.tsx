@@ -5,11 +5,11 @@ import { QuoteSection } from "@/components/landing/quote"
 import { ProblemSection } from "@/components/landing/problem"
 import { SolutionSection } from "@/components/landing/solution"
 import { WhatWeDoSection } from "@/components/landing/what-we-do"
-import { YourJourneySection } from "@/components/landing/your-journey"
 import { SocialProofSection } from "@/components/landing/social-proof"
 import { PricingSection } from "@/components/landing/pricing"
 import { FaqSection } from "@/components/landing/faq"
 import { LocationSection } from "@/components/landing/location"
+import { ClientResultsSection } from "@/components/landing/client-results"
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <ProblemSection />
       <SolutionSection />
       <WhatWeDoSection />
-      <YourJourneySection />
+      <ClientResultsSection />
       <SocialProofSection />
       <PricingSection />
       <FaqSection />

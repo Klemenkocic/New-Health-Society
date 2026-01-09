@@ -11,7 +11,7 @@ export function QuoteSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     viewport={{ once: true }}
-                    className="font-serif italic text-3xl md:text-5xl text-foreground leading-tight"
+                    className="font-serif italic text-2xl md:text-3xl text-foreground leading-relaxed"
                 >
                     "Health happens when you put in the work.
                     <br />

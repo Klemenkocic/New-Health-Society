@@ -41,9 +41,9 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: introComplete ? 1 : 0, y: introComplete ? 0 : 20 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="font-serif italic text-3xl md:text-4xl mb-8"
+                            className="font-serif italic text-3xl md:text-5xl mb-8 leading-tight"
                         >
-                            Refining the human engine.
+                            PERSONAL TRAINING
                         </motion.h2>
 
                         <motion.p
@@ -52,9 +52,9 @@ export function Hero() {
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="font-sans text-lg md:text-xl max-w-sm leading-relaxed opacity-80 mb-12"
                         >
-                            We combine clinical precision with high-performance coaching.
-                            Three hours per week. Data-driven results.
+                            We meet you where you are — and help you get where you want to go.
                         </motion.p>
+
 
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -62,7 +62,7 @@ export function Hero() {
                             transition={{ duration: 0.8, delay: 0.6 }}
                         >
                             <Link href="/consultation">
-                                <Button className="rounded-full px-10 py-7 text-sm uppercase tracking-widest bg-[#293133] text-[#F3F0E5] hover:bg-[#293133]/90">
+                                <Button variant="glass" className="px-10 py-7 text-sm uppercase tracking-widest">
                                     Start Your Journey
                                 </Button>
                             </Link>

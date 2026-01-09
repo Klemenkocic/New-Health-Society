@@ -135,7 +135,9 @@ export function LocationSection() {
 
             {/* Info Side (Right) */}
             <div className="w-full md:w-1/2 bg-[#293133] text-[#F3F0E5] p-12 md:p-24 flex flex-col justify-center">
-                <h2 className="font-serif font-bold text-3xl md:text-4xl mb-12">VISIT THE LAB</h2>
+                <div className="mb-12 border-b border-[#F3F0E5]/10 pb-8">
+                    <h2 className="font-serif text-5xl md:text-6xl text-[#F3F0E5]">Location</h2>
+                </div>
 
                 <div className="space-y-8">
                     <div className="flex items-start gap-4">

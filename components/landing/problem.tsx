@@ -32,7 +32,7 @@ const problems = [
 
 export function ProblemSection() {
     return (
-        <section className="py-24 px-6 md:px-12 bg-background">
+        <section className="pt-24 pb-0 px-6 md:px-12 bg-background">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                     {problems.map((item, index) => (
@@ -57,7 +57,7 @@ export function ProblemSection() {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="text-center max-w-3xl mx-auto mt-24"
+                    className="text-center max-w-3xl mx-auto mt-12"
                 >
                     <p className="font-serif italic text-2xl md:text-3xl text-foreground leading-relaxed">
                         "The most important thing? You feel welcomed and understood.

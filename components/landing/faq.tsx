@@ -29,7 +29,9 @@ export function FaqSection() {
     return (
         <section className="py-24 px-6 md:px-12 bg-background">
             <div className="max-w-3xl mx-auto">
-                <h2 className="font-serif font-bold text-3xl md:text-5xl text-foreground mb-16 text-center">FAQ</h2>
+                <div className="mb-16 border-b border-foreground/10 pb-8">
+                    <h2 className="font-serif text-5xl md:text-7xl text-foreground">FAQ</h2>
+                </div>
 
                 <div className="space-y-4">
                     {faqs.map((faq, index) => {
