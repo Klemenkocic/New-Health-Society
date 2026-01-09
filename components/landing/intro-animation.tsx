@@ -24,19 +24,19 @@ export function IntroAnimation({ onComplete }: { onComplete?: () => void }) {
             />
 
             {/* Content Layer - Does NOT fade out, just moves via layoutId */}
-            <div className="relative z-10 flex flex-col items-center justify-center leading-[0.8]">
+            <div className="relative z-10 flex flex-col items-center justify-center leading-[0.8]" style={{ fontFamily: 'var(--font-brand)' }}>
                 <motion.div layoutId="word-new-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="font-serif font-bold text-[6vw] tracking-tighter text-[#26538D]">
+                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         NEW
                     </span>
                 </motion.div>
                 <motion.div layoutId="word-health-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="font-serif font-bold text-[6vw] tracking-tighter text-[#26538D]">
+                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         HEALTH
                     </span>
                 </motion.div>
                 <motion.div layoutId="word-society-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="font-serif font-bold text-[6vw] tracking-tighter text-[#26538D]">
+                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         SOCIETY
                     </span>
                 </motion.div>

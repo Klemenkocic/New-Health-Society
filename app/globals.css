@@ -41,6 +41,7 @@
 
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --font-brand: var(--font-brand);
 
   --shadow-subtle: var(--shadow-subtle);
   --shadow-small: var(--shadow-small);

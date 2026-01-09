@@ -117,10 +117,16 @@ export function SolutionSection() {
                     <h2 className="font-serif text-5xl md:text-7xl">Your Journey</h2>
                 </div>
 
-                <div className="flex flex-col">
-                    {steps.map((step) => (
-                        <StepItem key={step.id} step={step} />
-                    ))}
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    {/* Empty 1/4 col */}
+                    <div className="hidden lg:block lg:col-span-1"></div>
+
+                    {/* Content 3/4 col */}
+                    <div className="lg:col-span-3 flex flex-col">
+                        {steps.map((step) => (
+                            <StepItem key={step.id} step={step} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

@@ -71,22 +71,22 @@ export function Hero() {
 
                     {/* Bottom of Left Column: The "Landing" spot for the large text */}
                     <div className="mt-24 lg:mt-auto pt-12 relative z-20">
-                        <div className="lg:absolute lg:bottom-12 lg:left-12 lg:w-full pointer-events-none flex flex-col items-start gap-[1vw] leading-[0.8] font-serif font-bold text-[12vw] tracking-tighter">
+                        <div className="lg:absolute lg:bottom-12 lg:left-12 lg:w-full pointer-events-none flex flex-col items-start gap-[1vw] leading-[0.8] text-[10.8vw] tracking-tighter" style={{ fontFamily: 'var(--font-brand)' }}>
                             {/* Only render these when intro is complete to trigger the layoutId transition from IntroAnimation */}
                             {introComplete && (
                                 <>
                                     <motion.div layoutId="word-new-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
-                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                        <span className="font-bold text-[10.8vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                                             NEW
                                         </span>
                                     </motion.div>
                                     <motion.div layoutId="word-health-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
-                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                        <span className="font-bold text-[10.8vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                                             HEALTH
                                         </span>
                                     </motion.div>
                                     <motion.div layoutId="word-society-wrapper" transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
-                                        <span className="font-serif font-bold text-[12vw] tracking-tighter text-[#26538D]">
+                                        <span className="font-bold text-[10.8vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                                             SOCIETY
                                         </span>
                                     </motion.div>

@@ -211,13 +211,13 @@ export function PricingSection() {
                 </div>
 
                 {/* SHARED FEATURES */}
-                <div className="border-t border-[#F3F0E5]/10 pt-16">
-                    <h4 className="text-center font-serif text-2xl mb-12 opacity-80">INCLUDED IN ALL MEMBERSHIPS</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div className="pt-0">
+                    <h4 className="text-center font-serif text-2xl mb-6 opacity-80">INCLUDED IN ALL MEMBERSHIPS</h4>
+                    <div className="flex flex-wrap justify-center items-center gap-3 text-[#F3F0E5]/70 font-inter text-sm md:text-base">
                         {allPlansInclude.map((feature, i) => (
-                            <div key={i} className="text-center p-6 rounded-xl bg-white/5 border border-white/5">
-                                <h5 className="font-bold mb-2 text-[#F3F0E5] text-lg">{feature.title}</h5>
-                                <p className="text-sm text-[#F3F0E5]/60">{feature.desc}</p>
+                            <div key={i} className="flex items-center">
+                                {i > 0 && <span className="mx-3 text-[10px] opacity-40">•</span>}
+                                <span>{feature.title}</span>
                             </div>
                         ))}
                     </div>

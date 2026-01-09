@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export function QuoteSection() {
     return (
-        <section className="py-32 px-6 bg-background border-t border-foreground/5">
+        <section className="pt-32 pb-16 px-6 bg-background border-t border-foreground/5">
             <div className="max-w-5xl mx-auto text-center">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}

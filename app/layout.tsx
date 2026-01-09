@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google"; // Restored
+import localFont from "next/font/local";
 import { basePath } from "@/lib/utils";
 import "./globals.css";
 
@@ -11,6 +12,17 @@ const inter = Inter({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+});
+
+const brand = localFont({
+  src: [
+    {
+      path: "./fonts/kobuzan-cy-grotesk-grand-dark.otf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-brand",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased font-sans`}
+        className={`${inter.variable} ${playfair.variable} ${brand.variable} font-sans`}
       >
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
           <div className="bg-blob blob-primary top-[-10%] left-[-10%] animate-pulse" style={{ animationDuration: '8s' }}></div>

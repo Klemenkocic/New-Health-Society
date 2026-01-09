@@ -114,56 +114,50 @@ export function LocationSection() {
     }), [])
 
     return (
-        <section className="py-0 relative h-[600px] w-full bg-neutral-100 flex flex-col md:flex-row">
-            {/* Map Side (Left) */}
-            <div className="w-full md:w-1/2 h-full bg-neutral-900 relative group overflow-hidden">
-                {isLoaded ? (
-                    <GoogleMap
-                        mapContainerStyle={{ width: '100%', height: '100%' }}
-                        center={center}
-                        zoom={15}
-                        options={mapOptions}
-                    >
-                        <Marker position={center} />
-                    </GoogleMap>
-                ) : (
-                    <div className="w-full h-full flex items-center justify-center text-neutral-500">
-                        Loading Map...
-                    </div>
-                )}
-            </div>
-
-            {/* Info Side (Right) */}
-            <div className="w-full md:w-1/2 bg-[#293133] text-[#F3F0E5] p-12 md:p-24 flex flex-col justify-center">
-                <div className="mb-12 border-b border-[#F3F0E5]/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-6xl text-[#F3F0E5]">Location</h2>
+        <section className="py-12 md:pb-24 px-6 md:px-12 bg-background">
+            <div className="max-w-7xl mx-auto h-[600px] flex flex-col md:flex-row">
+                {/* Map Side (Left) */}
+                <div className="w-full md:w-1/2 h-full bg-neutral-900 relative group overflow-hidden rounded-3xl shadow-sm">
+                    {isLoaded ? (
+                        <GoogleMap
+                            mapContainerStyle={{ width: '100%', height: '100%' }}
+                            center={center}
+                            zoom={15}
+                            options={mapOptions}
+                        >
+                            <Marker position={center} />
+                        </GoogleMap>
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-neutral-500">
+                            Loading Map...
+                        </div>
+                    )}
                 </div>
 
-                <div className="space-y-8">
-                    <div className="flex items-start gap-4">
-                        <MapPin className="w-6 h-6 text-primary mt-1" />
-                        <div>
-                            <h4 className="font-bold mb-1">Location</h4>
-                            <p className="opacity-80">Leopoldstraße 123</p>
-                            <p className="opacity-80">80802 Munich, Germany</p>
-                        </div>
+                {/* Info Side (Right) */}
+                <div className="w-full md:w-1/2 bg-[#F3F0E5] text-[#293133] p-12 md:p-24 flex flex-col justify-center">
+                    <div className="mb-12 border-b border-[#293133]/10 pb-8">
+                        <h2 className="font-serif text-5xl md:text-6xl text-[#293133]">Location</h2>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                        <Clock className="w-6 h-6 text-primary mt-1" />
-                        <div>
-                            <h4 className="font-bold mb-1">Opening Hours</h4>
-                            <p className="opacity-80">Mon - Fri: 06:00 - 22:00</p>
-                            <p className="opacity-80">Sat - Sun: 08:00 - 20:00</p>
+                    <div className="space-y-8">
+                        <div className="flex items-start gap-4">
+                            <MapPin className="w-6 h-6 text-primary mt-1" />
+                            <div>
+                                <h4 className="font-bold mb-1">Location</h4>
+                                <p className="opacity-80">Lilienthalallee 5</p>
+                                <p className="opacity-80">80807 Munich, Germany</p>
+                                <p className="text-primary text-xs font-bold mt-2 tracking-widest uppercase">Free Parking Available</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="flex items-start gap-4">
-                        <Mail className="w-6 h-6 text-primary mt-1" />
-                        <div>
-                            <h4 className="font-bold mb-1">Contact</h4>
-                            <p className="opacity-80">info@newhealthsociety.com</p>
-                            <p className="opacity-80">+49 89 12345678</p>
+                        <div className="flex items-start gap-4">
+                            <Clock className="w-6 h-6 text-primary mt-1" />
+                            <div>
+                                <h4 className="font-bold mb-1">Opening Hours</h4>
+                                <p className="opacity-80">Mon - Fri: 07:00 - 19:00</p>
+                                <p className="opacity-80">Sat: 09:00 - 12:00</p>
+                            </div>
                         </div>
                     </div>
                 </div>
