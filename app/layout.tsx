@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google"; // Restored
+import { Inter, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { basePath } from "@/lib/utils";
 import "./globals.css";
@@ -43,6 +43,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${brand.variable} font-sans`}
       >
+
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
           <div className="bg-blob blob-primary top-[-10%] left-[-10%] animate-pulse" style={{ animationDuration: '8s' }}></div>
           <div className="bg-blob blob-accent bottom-[-10%] right-[-10%] animate-pulse" style={{ animationDuration: '10s' }}></div>

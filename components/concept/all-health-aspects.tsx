@@ -7,85 +7,131 @@ import Image from "next/image"
 import { basePath } from "@/lib/utils"
 
 const aspects = [
-    { id: "strength", title: "Strength", desc: "Foundation of longevity.", color: "bg-stone-200" },
-    { id: "sleep", title: "Sleep", desc: "Where recovery happens.", color: "bg-stone-300" },
-    { id: "nutrition", title: "Nutrition", desc: "Fuel for performance.", color: "bg-stone-400" },
-    { id: "stress", title: "Stress", desc: "Management is key.", color: "bg-stone-500" },
-    { id: "gut", title: "Gut Health", desc: "The second brain.", color: "bg-stone-200" },
-    { id: "hormones", title: "Hormones", desc: "Balance drives everything.", color: "bg-stone-300" },
-    { id: "recovery", title: "Recovery", desc: "Active and passive.", color: "bg-stone-400" },
-    { id: "cardio", title: "Cardio", desc: "Heart health.", color: "bg-stone-500" },
-    { id: "community", title: "Community", desc: "We go further together.", color: "bg-stone-200" },
-    // ... more items
+    { id: "strength", title: "Strength training", desc: "Foundation of longevity.", color: "bg-stone-200" },
+    { id: "nutrition", title: "Nutritional guidance", desc: "Fuel for performance.", color: "bg-stone-300" },
+    { id: "sleep", title: "Sleep improvement", desc: "Where recovery happens.", color: "bg-stone-400" },
+    { id: "energy", title: "Energy levels", desc: "Vitality for life.", color: "bg-stone-500" },
+    { id: "stress", title: "Stress management", desc: "Calm the mind.", color: "bg-stone-200" },
+    { id: "gut", title: "Gut health", desc: "The second brain.", color: "bg-stone-300" },
+    { id: "hormones", title: "Hormonal balance", desc: "Drive your drive.", color: "bg-stone-400" },
+    { id: "recovery", title: "Recovery & Rehabilitation", desc: "Bounce back stronger.", color: "bg-stone-500" },
+    { id: "convenience", title: "Convenience", desc: "Seamless integration.", color: "bg-stone-200" },
+    { id: "supplementation", title: "Supplementation", desc: "Targeted support.", color: "bg-stone-300" },
+    { id: "blood", title: "Blood sugar balance", desc: "Stable energy.", color: "bg-stone-400" },
+    { id: "longevity", title: "Longevity", desc: "Live longer, better.", color: "bg-stone-500" },
 ]
+
+// Simple, reliable animation variants
+const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+}
+
+const modalVariants = {
+    hidden: {
+        opacity: 0,
+        scale: 0.95,
+        y: 20
+    },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+            duration: 0.3,
+            ease: [0.25, 0.1, 0.25, 1] as const
+        }
+    },
+    exit: {
+        opacity: 0,
+        scale: 0.95,
+        y: 20,
+        transition: {
+            duration: 0.2,
+            ease: [0.25, 0.1, 0.25, 1] as const
+        }
+    }
+}
 
 export function AllHealthAspectsSection() {
     const [selectedId, setSelectedId] = useState<string | null>(null)
+    const selectedItem = selectedId ? aspects.find(a => a.id === selectedId) : null
 
     return (
-        <section className="py-24 px-6 bg-background">
+        <section className="py-12 px-6 md:px-12 bg-grainy-beige">
             <div className="max-w-7xl mx-auto">
-                <h2 className="font-serif font-bold text-4xl mb-12 text-center">ALL HEALTH ASPECTS</h2>
+                <div className="w-full mb-8 border-b border-[#293133]/10 pb-6">
+                    <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
+                        All Health Aspects
+                    </h2>
+                </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {/* Grid of aspect cards */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {aspects.map((aspect) => (
-                        <motion.div
+                        <div
                             key={aspect.id}
-                            layoutId={aspect.id}
                             onClick={() => setSelectedId(aspect.id)}
-                            className={`aspect-square ${aspect.color} p-6 cursor-pointer hover:brightness-95 transition-all rounded-sm flex flex-col justify-end group`}
+                            className={`aspect-[3/2] ${aspect.color} p-4 cursor-pointer hover:brightness-95 hover:scale-[1.02] transition-all duration-200 rounded-sm flex flex-col justify-end group`}
                         >
-                            <motion.h3 className="font-bold text-lg group-hover:scale-105 transition-transform origin-left">
+                            <h3 className="font-serif font-bold text-lg leading-tight text-[#293133]">
                                 {aspect.title}
-                            </motion.h3>
-                        </motion.div>
+                            </h3>
+                        </div>
                     ))}
                 </div>
 
+                {/* Modal with simple fade + scale animation */}
                 <AnimatePresence>
-                    {selectedId && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none px-6">
+                    {selectedItem && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+                            {/* Backdrop */}
                             <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
+                                variants={backdropVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                transition={{ duration: 0.3 }}
                                 onClick={() => setSelectedId(null)}
-                                className="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-auto"
+                                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                             />
 
+                            {/* Modal Content */}
                             <motion.div
-                                layoutId={selectedId}
-                                className="bg-[#F3F0E5] w-full max-w-4xl aspect-video md:aspect-[21/9] rounded-sm shadow-2xl overflow-hidden relative pointer-events-auto flex flex-col md:flex-row"
+                                variants={modalVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                className="bg-[#F3F0E5] w-full max-w-4xl aspect-video md:aspect-[21/9] rounded-lg shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row"
                             >
                                 {/* Close Button */}
                                 <button
-                                    onClick={(e) => { e.stopPropagation(); setSelectedId(null); }}
+                                    onClick={() => setSelectedId(null)}
                                     className="absolute top-4 right-4 z-10 p-2 bg-black/10 hover:bg-black/20 rounded-full transition-colors"
                                 >
-                                    <X className="w-6 h-6" />
+                                    <X className="w-6 h-6 text-[#293133]" />
                                 </button>
 
-                                {/* Content */}
-                                {(() => {
-                                    const item = aspects.find(a => a.id === selectedId)
-                                    return (
-                                        <>
-                                            <div className={`w-full md:w-1/2 p-12 flex flex-col justify-center ${item?.color}`}>
-                                                <motion.h3 className="font-serif font-bold text-4xl mb-4">{item?.title}</motion.h3>
-                                                <motion.p className="text-xl opacity-80">{item?.desc}</motion.p>
-                                            </div>
-                                            <div className="w-full md:w-1/2 bg-black flex items-center justify-center text-white/50 relative overflow-hidden">
-                                                <Image
-                                                    src={`${basePath}/images/gym/NHS Website-${34 + (aspects.indexOf(item || aspects[0]) % 5)}.jpg`}
-                                                    alt={item?.title || "Health Aspect"}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                                <div className="absolute inset-0 bg-black/20" />
-                                            </div>
-                                        </>
-                                    )
-                                })()}
+                                {/* Left: Text Content */}
+                                <div className={`w-full md:w-1/2 p-12 flex flex-col justify-center ${selectedItem.color}`}>
+                                    <h3 className="font-serif font-bold text-4xl mb-4 text-[#293133]">
+                                        {selectedItem.title}
+                                    </h3>
+                                    <p className="text-xl opacity-80 text-[#293133]">
+                                        {selectedItem.desc}
+                                    </p>
+                                </div>
+
+                                {/* Right: Image */}
+                                <div className="w-full md:w-1/2 bg-black flex items-center justify-center relative overflow-hidden">
+                                    <Image
+                                        src={`${basePath}/images/gym/NHS Website-${34 + (aspects.indexOf(selectedItem) % 5)}.jpg`}
+                                        alt={selectedItem.title}
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black/10" />
+                                </div>
                             </motion.div>
                         </div>
                     )}

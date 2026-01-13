@@ -11,7 +11,7 @@ const clients = [
 
 export function TrustedBySection() {
     return (
-        <section className="py-24 px-6 md:px-12 bg-background">
+        <section className="py-24 px-6 md:px-12 bg-grainy-beige">
             <div className="max-w-7xl mx-auto">
                 <h2 className="font-serif font-bold text-lg text-foreground mb-16 text-center">
                     AMBITIOUS PEOPLE TRAIN HERE

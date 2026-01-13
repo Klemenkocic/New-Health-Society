@@ -39,7 +39,7 @@ const steps = [
 
 export function YourJourneySection() {
     return (
-        <section className="py-24 md:py-32 px-6 bg-background relative overflow-hidden" id="process">
+        <section className="py-24 md:py-32 px-6 bg-grainy-beige relative overflow-hidden" id="process">
             <div className="max-w-6xl mx-auto">
 
                 {/* Header */}

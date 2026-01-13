@@ -32,70 +32,78 @@ export function ThreeModelsSection() {
     const [activeId, setActiveId] = useState<string>("coaching")
 
     return (
-        <section className="py-24 px-6 md:px-12 bg-background min-h-[800px]">
-            <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row gap-12">
-                {/* Left Side: Accordion */}
-                <div className="w-full md:w-1/2 flex flex-col justify-center space-y-8">
-                    <h2 className="font-serif font-bold text-3xl mb-8 text-foreground/50">OUR MODELS</h2>
-
-                    {models.map((model) => {
-                        const isActive = activeId === model.id
-                        return (
-                            <div
-                                key={model.id}
-                                className="border-b border-foreground/10 pb-6 cursor-pointer group"
-                                onClick={() => setActiveId(model.id)}
-                            >
-                                <div className="flex items-center justify-between mb-4">
-                                    <h3 className={`font-serif font-bold text-4xl transition-colors ${isActive ? "text-foreground" : "text-foreground/30 group-hover:text-foreground/60"}`}>
-                                        {model.title}
-                                    </h3>
-                                    {isActive ? <Minus className="w-6 h-6" /> : <Plus className="w-6 h-6 opacity-30" />}
-                                </div>
-
-                                <AnimatePresence>
-                                    {isActive && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <p className="font-inter text-lg text-foreground/80 max-w-md">
-                                                {model.desc}
-                                            </p>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        )
-                    })}
+        <section className="py-24 px-6 md:px-12 bg-grainy-beige min-h-[800px]">
+            <div className="max-w-7xl mx-auto h-full flex flex-col gap-12">
+                {/* Header - Full Width */}
+                <div className="w-full flex-none border-b border-[#293133]/10 pb-8">
+                    <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
+                        Our Models
+                    </h2>
                 </div>
 
-                {/* Right Side: Image Display */}
-                <div className="w-full md:w-1/2 relative h-[500px] md:h-auto rounded-sm overflow-hidden">
-                    <AnimatePresence mode="wait">
-                        {models.map((model) => (
-                            model.id === activeId && (
-                                <motion.div
+                {/* Content Container: Accordion + Image */}
+                <div className="flex flex-col md:flex-row gap-12 w-full">
+                    {/* Left Side: Accordion */}
+                    <div className="w-full md:w-1/2 flex flex-col justify-center space-y-8">
+                        {models.map((model) => {
+                            const isActive = activeId === model.id
+                            return (
+                                <div
                                     key={model.id}
-                                    initial={{ opacity: 0, scale: 1.05 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="absolute inset-0 w-full h-full cursor-default"
+                                    className="border-b border-foreground/10 pb-6 cursor-pointer group"
+                                    onClick={() => setActiveId(model.id)}
                                 >
-                                    <Image
-                                        src={model.imageSrc}
-                                        alt={model.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-black/20" /> {/* Slight overlay for text contrast if needed? Actually removing text placeholder */}
-                                </motion.div>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <h3 className={`font-serif font-bold text-4xl transition-colors ${isActive ? "text-foreground" : "text-foreground/30 group-hover:text-foreground/60"}`}>
+                                            {model.title}
+                                        </h3>
+                                        {isActive ? <Minus className="w-6 h-6" /> : <Plus className="w-6 h-6 opacity-30" />}
+                                    </div>
+
+                                    <AnimatePresence>
+                                        {isActive && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                className="overflow-hidden"
+                                            >
+                                                <p className="font-inter text-lg text-foreground/80 max-w-md">
+                                                    {model.desc}
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
                             )
-                        ))}
-                    </AnimatePresence>
+                        })}
+                    </div>
+
+                    {/* Right Side: Image Display */}
+                    <div className="w-full md:w-1/2 relative h-[500px] md:h-auto rounded-sm overflow-hidden">
+                        <AnimatePresence mode="wait">
+                            {models.map((model) => (
+                                model.id === activeId && (
+                                    <motion.div
+                                        key={model.id}
+                                        initial={{ opacity: 0, scale: 1.05 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="absolute inset-0 w-full h-full cursor-default"
+                                    >
+                                        <Image
+                                            src={model.imageSrc}
+                                            alt={model.title}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/20" />
+                                    </motion.div>
+                                )
+                            ))}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </div>
         </section >

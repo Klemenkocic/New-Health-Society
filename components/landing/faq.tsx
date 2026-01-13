@@ -27,50 +27,58 @@ export function FaqSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0)
 
     return (
-        <section className="py-24 px-6 md:px-12 bg-background">
-            <div className="max-w-3xl mx-auto">
-                <div className="mb-16 border-b border-foreground/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-7xl text-foreground">FAQ</h2>
-                </div>
+        <section className="py-24 px-6 md:px-12 bg-grainy-beige">
+            <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
+                    {/* Title Column */}
+                    <div className="md:col-span-4 md:sticky md:top-24 h-fit">
+                        <h2 className="font-serif text-5xl md:text-7xl text-foreground mb-8">FAQ</h2>
+                        <p className="font-inter text-foreground/60 text-lg max-w-sm">
+                            Answers to common questions about our training philosophy and logistics.
+                        </p>
+                    </div>
 
-                <div className="space-y-4">
-                    {faqs.map((faq, index) => {
-                        const isOpen = openIndex === index
-                        return (
-                            <div key={index} className="border-b border-foreground/10 pb-4">
-                                <button
-                                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                                    className="w-full flex justify-between items-center py-4 text-left focus:outline-none group"
-                                >
-                                    <span className="font-serif font-medium text-xl text-foreground group-hover:text-primary transition-colors">
-                                        {faq.question}
-                                    </span>
-                                    <motion.div
-                                        animate={{ rotate: isOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.3 }}
+                    {/* Questions Column */}
+                    <div className="md:col-span-8 space-y-4">
+                        {faqs.map((faq, index) => {
+                            const isOpen = openIndex === index
+                            return (
+                                <div key={index} className="border-b border-foreground/10 pb-4">
+                                    <button
+                                        onClick={() => setOpenIndex(isOpen ? null : index)}
+                                        className="w-full flex justify-between items-center py-4 text-left focus:outline-none group"
                                     >
-                                        <ChevronDown className="w-5 h-5 text-foreground/50" />
-                                    </motion.div>
-                                </button>
-
-                                <AnimatePresence>
-                                    {isOpen && (
+                                        <span className="font-serif font-medium text-xl text-foreground group-hover:text-primary transition-colors pr-8">
+                                            {faq.question}
+                                        </span>
                                         <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
+                                            animate={{ rotate: isOpen ? 180 : 0 }}
                                             transition={{ duration: 0.3 }}
-                                            className="overflow-hidden"
+                                            className="flex-shrink-0"
                                         >
-                                            <p className="pb-6 text-foreground/80 font-inter leading-relaxed">
-                                                {faq.answer}
-                                            </p>
+                                            <ChevronDown className="w-5 h-5 text-foreground/50" />
                                         </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        )
-                    })}
+                                    </button>
+
+                                    <AnimatePresence>
+                                        {isOpen && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="overflow-hidden"
+                                            >
+                                                <p className="pb-6 text-foreground/80 font-inter leading-relaxed">
+                                                    {faq.answer}
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,9 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import useEmblaCarousel from "embla-carousel-react"
-
-import Autoplay from "embla-carousel-autoplay"
+import { motion, useAnimationControls } from "framer-motion"
+import { useEffect, useState } from "react"
 import { basePath } from "@/lib/utils"
 
 // Specific images requested for the Studio section
@@ -23,42 +22,81 @@ const studioImages = [
 ]
 
 export function GymGallerySection() {
-    const [emblaRef] = useEmblaCarousel({ loop: true, align: "start" }, [
-        Autoplay({ delay: 3000, stopOnMouseEnter: true })
-    ])
+    // Determine duplications needed to fill screen + scroll
+    // For safety, we just duplicate the list enough times.
+    const marqueeImages = [...studioImages, ...studioImages, ...studioImages]
 
     return (
-        <section className="py-24 bg-background border-t border-foreground/5">
+        <section className="py-24 bg-grainy-beige overflow-hidden">
             <div className="max-w-[1920px] mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end px-6 md:px-12 mb-16 max-w-7xl mx-auto">
-                    <div>
-                        <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Where We Train</span>
-                        <h2 className="font-serif font-bold text-3xl md:text-5xl text-foreground">
-                            THE STUDIO
+                <div className="px-6 md:px-12 mb-12 md:mb-16 max-w-7xl mx-auto">
+                    <div className="w-full border-b border-[#293133]/10 pb-8">
+                        <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
+                            The Studio
                         </h2>
                     </div>
-                    <p className="font-serif italic text-xl text-foreground/60 max-w-md mt-4 md:mt-0">
-                        Designed for focus. Built for performance.
-                    </p>
                 </div>
 
-                <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-                    <div className="flex">
-                        {studioImages.map((src, index) => (
-                            <div key={index} className="flex-[0_0_85%] md:flex-[0_0_45%] lg:flex-[0_0_30%] pl-6 min-w-0">
-                                <div className="w-full aspect-[4/3] relative rounded-sm overflow-hidden select-none">
-                                    <Image
-                                        src={src}
-                                        alt={`NHS Studio Shot ${index + 1}`}
-                                        fill
-                                        className="object-cover hover:scale-105 transition-transform duration-700"
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                {/* Marquee Container */}
+                <div
+                    className="relative w-full flex overflow-hidden"
+                >
+                    {/* 
+                       Using a simple CSS animation or Framer Motion?
+                       Framer Motion is requested for smooth pause.
+                     */}
+                    <MarqueeContent images={marqueeImages} />
                 </div>
             </div>
         </section>
+    )
+}
+
+function MarqueeContent({ images }: { images: string[] }) {
+    const controls = useAnimationControls()
+
+    useEffect(() => {
+        controls.start({
+            x: "-50%",
+            transition: {
+                duration: 60, // Slow speed (adjust as needed)
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop"
+            }
+        })
+    }, [controls])
+
+    return (
+        <motion.div
+            className="flex gap-6 pl-6 min-w-max"
+            animate={controls}
+            onMouseEnter={() => controls.stop()}
+            onMouseLeave={() => {
+                controls.start({
+                    x: "-50%",
+                    transition: {
+                        duration: 60, // Must match initial duration
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "loop"
+                    }
+                })
+            }}
+            // Reset to 0 prevents jump? Actually better to just loop a large set.
+            // standard marquee technique: animate from 0 to -50% where 50% is exact duplicate.
+            style={{ x: 0 }}
+        >
+            {images.map((src, index) => (
+                <div key={index} className="w-[300px] md:w-[450px] aspect-[4/3] relative rounded-sm overflow-hidden flex-shrink-0 cursor-pointer">
+                    <Image
+                        src={src}
+                        alt={`NHS Studio Shot ${index}`}
+                        fill
+                        className="object-cover hover:scale-110 transition-transform duration-700"
+                    />
+                </div>
+            ))}
+        </motion.div>
     )
 }

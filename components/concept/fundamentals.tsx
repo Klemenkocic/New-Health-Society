@@ -6,7 +6,7 @@ export function FundamentalsSection() {
     const words = ["TRAINING", "RECOVERY", "SOCIAL"]
 
     return (
-        <section className="py-32 px-6 overflow-hidden bg-background">
+        <section className="py-32 px-6 overflow-hidden bg-grainy-beige">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
                 {words.map((word, index) => (
                     <motion.h2

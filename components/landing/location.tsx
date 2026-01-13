@@ -114,7 +114,7 @@ export function LocationSection() {
     }), [])
 
     return (
-        <section className="py-12 md:pb-24 px-6 md:px-12 bg-background">
+        <section className="py-12 md:pb-24 px-6 md:px-12 bg-grainy-beige">
             <div className="max-w-7xl mx-auto h-[600px] flex flex-col md:flex-row">
                 {/* Map Side (Left) */}
                 <div className="w-full md:w-1/2 h-full bg-neutral-900 relative group overflow-hidden rounded-3xl shadow-sm">

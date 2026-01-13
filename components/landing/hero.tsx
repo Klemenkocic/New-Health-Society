@@ -24,7 +24,7 @@ export function Hero() {
     const y2 = useTransform(scrollY, [0, 1000], [0, -300])
 
     return (
-        <section className="relative min-h-screen w-full bg-[#F3F0E5] text-[#293133] overflow-hidden">
+        <section className="relative min-h-screen w-full bg-grainy-beige text-[#293133] overflow-hidden">
             {/* Intro Animation Overlay */}
             <AnimatePresence>
                 {!introComplete && (
@@ -110,13 +110,21 @@ export function Hero() {
                         transition={{ duration: 1.0, ease: "easeOut", delay: 0 }}
                         className="absolute top-0 right-0 w-[80%] aspect-[3/4] overflow-hidden rounded-sm"
                     >
-                        <Image
-                            src={heroImages[0]}
-                            alt="NHS Studio"
-                            fill
-                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                            priority
-                        />
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            poster={heroImages[0]}
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                        >
+                            <source src={`${basePath}/videos/home-hero.mp4`} type="video/mp4" />
+                            <img
+                                src={heroImages[0]}
+                                alt="NHS Studio"
+                                className="w-full h-full object-cover"
+                            />
+                        </video>
                     </motion.div>
 
                     {/* Image 2: Overlay / Faster Parallax */}

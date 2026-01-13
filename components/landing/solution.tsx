@@ -111,7 +111,7 @@ function StepItem({ step }: { step: typeof steps[0] }) {
 
 export function SolutionSection() {
     return (
-        <section className="pt-12 pb-32 px-6 md:px-12 bg-[#F3F0E5] text-[#293133]">
+        <section className="pt-12 pb-32 px-6 md:px-12 bg-grainy-beige text-[#293133]">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-24 flex items-end justify-between border-b border-[#293133]/10 pb-8">
                     <h2 className="font-serif text-5xl md:text-7xl">Your Journey</h2>

@@ -142,10 +142,19 @@ export function SocialProofSection() {
 
 
     return (
-        <section className="py-24 px-6 md:px-12 bg-background border-t border-foreground/5">
+        <section className="py-24 px-6 md:px-12 bg-grainy-beige border-t border-foreground/5">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-16 border-b border-foreground/10 pb-8">
+                <div className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
                     <h2 className="font-serif text-5xl md:text-7xl text-foreground">Trusted By</h2>
+                    <a
+                        href="https://www.google.com/search?q=New+Health+Society+Munich+Reviews"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-foreground/60 hover:text-primary transition-colors hover:underline text-sm font-medium flex items-center gap-2 mb-2"
+                    >
+                        View all Google reviews
+                        <Star className="w-4 h-4" />
+                    </a>
                 </div>
 
                 {/* Animated Grid */}

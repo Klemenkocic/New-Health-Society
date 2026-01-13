@@ -8,44 +8,62 @@ import { basePath } from "@/lib/utils"
 
 export function ConceptHero() {
     return (
-        <section className="relative h-screen min-h-[800px] w-full bg-[#F3F0E5] flex items-end pb-12 px-6 md:px-12">
-            {/* Background Video or Image would be absolute inset-0 z-0 */}
+        <section className="relative min-h-screen w-full bg-grainy-beige px-6 md:px-12 pt-32 pb-12 overflow-hidden">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[800px]">
 
-            <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-
-                {/* Bottom Left: Title */}
-                <div className="col-span-1 md:col-span-8">
+                {/* Left Column: Content */}
+                <div className="col-span-1 lg:col-span-5 flex flex-col justify-center h-full order-2 lg:order-1">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-8"
                     >
-                        <div className="text-sm font-medium text-primary tracking-wide mb-2">THE METHOD</div>
-                        <h1 className="font-serif font-extrabold text-[12vw] md:text-[8rem] leading-[0.9] text-foreground origin-bottom-left">
-                            CONCEPT
+                        <div className="text-xl md:text-2xl font-serif italic text-neutral-500 mb-6">The Method</div>
+                        <h1 className="font-serif font-bold text-6xl md:text-8xl leading-[0.9] text-[#293133] mb-8">
+                            Concept
                         </h1>
+
+                        <p className="font-inter text-[#293133]/80 text-lg leading-relaxed max-w-md mb-12">
+                            A holistic approach to human performance, integrating training, nutrition, and recovery.
+                        </p>
+
+                        <Link href="/consultation">
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="px-8 text-lg h-14 rounded-full border-[#293133]/20 hover:bg-[#293133]/5 text-[#293133]"
+                            >
+                                Book Initial Consultation
+                            </Button>
+                        </Link>
                     </motion.div>
                 </div>
 
-                {/* Bottom Right: CTA & Video Preview */}
-                <div className="col-span-1 md:col-span-4 flex flex-col items-start md:items-end gap-6">
-                    <div className="w-full aspect-video bg-neutral-200 rounded-sm overflow-hidden relative group cursor-pointer">
-                        <Image
-                            src={`${basePath}/images/gym/NHS Website-35.jpg`}
-                            alt="NHS Training Methodology"
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        {/* Overlay */}
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </div>
-
-                    <Link href="/consultation">
-                        <Button size="lg" className="px-8 text-lg h-14">
-                            Book Initial Consultation
-                        </Button>
-                    </Link>
+                {/* Right Column: Video Card */}
+                <div className="col-span-1 lg:col-span-7 relative h-full flex items-center justify-end order-1 lg:order-2">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.0, ease: "easeOut" }}
+                        className="relative w-full aspect-[3/4] md:w-[80%] md:aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl"
+                    >
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            poster={`${basePath}/images/gym/NHS Website-35.jpg`}
+                            className="w-full h-full object-cover"
+                        >
+                            <source src={`${basePath}/videos/concept-hero.mp4`} type="video/mp4" />
+                            <img
+                                src={`${basePath}/images/gym/NHS Website-35.jpg`}
+                                alt="Background"
+                                className="w-full h-full object-cover"
+                            />
+                        </video>
+                        {/* Optional overlay for better contrast if needed, but per request just rounded video */}
+                    </motion.div>
                 </div>
             </div>
         </section >
