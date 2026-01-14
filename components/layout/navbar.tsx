@@ -19,29 +19,33 @@ export function Navbar({ show = true }: { show?: boolean }) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: show ? 0.3 : 0 }}
             className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 text-[#293133]"
         >
-            <div className="max-w-[1920px] mx-auto flex items-start justify-between">
+            <div className="max-w-[1920px] mx-auto grid grid-cols-3 items-center">
                 {/* Left: Brand / Home Link */}
-                <Link href="/" className="group flex flex-col items-start gap-1">
-                    <Image
-                        src={`${basePath}/images/nhs-brandmark.svg`}
-                        alt="New Health Society"
-                        width={180}
-                        height={40}
-                        className="h-10 w-auto object-contain"
-                    />
-                </Link>
+                <div className="flex justify-start">
+                    <Link href="/" className="group flex flex-col items-start gap-1">
+                        <Image
+                            src={`${basePath}/images/nhs-brandmark.svg`}
+                            alt="New Health Society"
+                            width={180}
+                            height={40}
+                            className="h-10 w-auto object-contain"
+                        />
+                    </Link>
+                </div>
 
                 {/* Center: Navigation (Desktop) */}
-                <div className="hidden md:flex gap-8 items-center bg-[#F3F0E5]/40 backdrop-blur-md px-6 py-2 rounded-2xl border border-[#293133]/10 shadow-sm">
-                    <Link href="/about" className="text-sm font-medium hover:opacity-70 transition-opacity">About</Link>
-                    <Link href="/concept" className="text-sm font-medium hover:opacity-70 transition-opacity">Concept</Link>
-                    <Link href="/braverman" className="text-sm font-medium hover:opacity-70 transition-opacity">Test</Link>
+                <div className="hidden md:flex justify-center">
+                    <div className="flex gap-8 items-center bg-[#F3F0E5]/40 backdrop-blur-md px-6 py-2 rounded-2xl border border-[#293133]/10 shadow-sm">
+                        <Link href="/about" className="text-sm font-medium hover:opacity-70 transition-opacity">About</Link>
+                        <Link href="/concept" className="text-sm font-medium hover:opacity-70 transition-opacity">Concept</Link>
+                        <Link href="/braverman" className="text-sm font-medium hover:opacity-70 transition-opacity">Test</Link>
+                    </div>
                 </div>
 
                 {/* Right: CTA / Menu */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-end gap-4">
                     <Link href="/consultation" className="hidden md:block">
-                        <span className="text-sm font-medium uppercase tracking-widest hover:underline underline-offset-4 decoration-1">Book Free Initial Consultation</span>
+                        <span className="text-xs font-medium uppercase tracking-wider hover:underline underline-offset-4 decoration-1">Book Consultation</span>
                     </Link>
                     {/* Mobile Menu Trigger Placeholder */}
                     <button className="md:hidden uppercase text-sm font-medium tracking-widest">Menu</button>

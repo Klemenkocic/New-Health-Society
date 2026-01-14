@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { basePath } from "@/lib/utils";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,6 +44,16 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${brand.variable} font-sans`}
       >
+        {/* Microsoft Clarity Analytics */}
+        <Script id="clarity-analytics" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "v1ch062djo");
+          `}
+        </Script>
 
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
           <div className="bg-blob blob-primary top-[-10%] left-[-10%] animate-pulse" style={{ animationDuration: '8s' }}></div>

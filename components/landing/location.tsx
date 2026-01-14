@@ -206,7 +206,7 @@ export function LocationSection() {
                 </div>
 
                 {/* Info Side (Right) */}
-                <div className="w-full lg:w-[35%] bg-[#F3F0E5] text-[#293133] p-8 lg:p-12 flex flex-col justify-center">
+                <div className="w-full lg:w-[35%] bg-[#F3F0E5] text-[#293133] p-8 lg:p-12 flex flex-col justify-center rounded-3xl">
                     <div className="mb-8 border-b border-[#293133]/10 pb-6">
                         <h2 className="font-serif text-4xl lg:text-5xl text-[#293133]">Location</h2>
                     </div>

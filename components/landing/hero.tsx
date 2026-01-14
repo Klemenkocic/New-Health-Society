@@ -15,8 +15,8 @@ const heroImages = [
     `${basePath}/images/gym/NHS Website-35.jpg`,
 ]
 
-export function Hero({ onIntroComplete }: { onIntroComplete?: () => void }) {
-    const [introComplete, setIntroComplete] = useState(false)
+export function Hero({ onIntroComplete, skipIntro = false }: { onIntroComplete?: () => void, skipIntro?: boolean }) {
+    const [introComplete, setIntroComplete] = useState(skipIntro)
     const { scrollY } = useScroll()
 
     // Parallax effect for the right column images
