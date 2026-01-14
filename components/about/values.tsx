@@ -1,27 +1,36 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { Target, Heart, TrendingUp, Users } from "lucide-react"
 
 const values = [
     {
         id: 1,
         title: "Excellence",
-        text: "We do not accept mediocrity. In our facility or in our own work. Every detail matters."
+        text: "We do not accept mediocrity. In our facility or in our own work. Every detail matters.",
+        icon: Target,
+        gradient: "from-blue-500/10 to-blue-600/5"
     },
     {
         id: 2,
         title: "Honesty",
-        text: "We tell you the truth. Even when it is uncomfortable. Especially when it is uncomfortable."
+        text: "We tell you the truth. Even when it is uncomfortable. Especially when it is uncomfortable.",
+        icon: Heart,
+        gradient: "from-red-500/10 to-red-600/5"
     },
     {
         id: 3,
         title: "Longevity",
-        text: "We play the long game. Health is not a 6-week challenge. It is a lifetime pursuit."
+        text: "We play the long game. Health is not a 6-week challenge. It is a lifetime pursuit.",
+        icon: TrendingUp,
+        gradient: "from-green-500/10 to-green-600/5"
     },
     {
         id: 4,
         title: "Respect",
-        text: "We respect the process. We respect the science. We respect each other."
+        text: "We respect the process. We respect the science. We respect each other.",
+        icon: Users,
+        gradient: "from-purple-500/10 to-purple-600/5"
     }
 ]
 
@@ -36,39 +45,47 @@ export function ValuesSection() {
                     </h2>
                 </div>
 
-                {/* Values - Full Width Cards with Accent Bar */}
-                <div className="space-y-6">
-                    {values.map((value, index) => (
-                        <motion.div
-                            key={value.id}
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="group relative bg-[#F3F0E5] border border-[#293133]/10 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300"
-                        >
-                            <div className="flex flex-col md:flex-row md:items-center">
-                                {/* Left Accent Bar */}
-                                <div className="hidden md:block w-2 self-stretch bg-[#26538D] group-hover:w-3 transition-all duration-300" />
+                {/* Values - Bento Grid Style */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {values.map((value, index) => {
+                        const Icon = value.icon
+                        return (
+                            <motion.div
+                                key={value.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className={`group relative bg-gradient-to-br ${value.gradient} backdrop-blur-sm border border-[#293133]/10 rounded-3xl p-8 md:p-10 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden`}
+                            >
+                                {/* Background Pattern */}
+                                <div className="absolute inset-0 opacity-5">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#293133] rounded-full blur-3xl transform translate-x-32 -translate-y-32" />
+                                </div>
 
                                 {/* Content */}
-                                <div className="flex-1 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                <div className="relative z-10 flex flex-col h-full">
+                                    {/* Icon */}
+                                    <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#293133]/5 border border-[#293133]/10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-300">
+                                        <Icon className="w-8 h-8 text-primary" />
+                                    </div>
+
                                     {/* Title */}
-                                    <h3 className="font-serif font-bold text-3xl md:text-4xl text-[#293133] group-hover:text-[#26538D] transition-colors">
+                                    <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#293133] mb-4 group-hover:text-primary transition-colors duration-300">
                                         {value.title}
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="font-sans text-[#293133]/70 leading-relaxed md:max-w-lg md:text-right">
+                                    <p className="font-inter text-[#293133]/70 leading-relaxed text-base md:text-lg flex-1">
                                         {value.text}
                                     </p>
-                                </div>
-                            </div>
 
-                            {/* Mobile Accent Bar */}
-                            <div className="md:hidden absolute left-0 top-0 bottom-0 w-2 bg-[#26538D]" />
-                        </motion.div>
-                    ))}
+                                    {/* Decorative Element */}
+                                    <div className="mt-6 h-1 w-16 bg-primary/20 rounded-full group-hover:w-24 group-hover:bg-primary/40 transition-all duration-300" />
+                                </div>
+                            </motion.div>
+                        )
+                    })}
                 </div>
             </div>
         </section>

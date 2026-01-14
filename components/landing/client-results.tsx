@@ -63,9 +63,9 @@ const ClientGallery = ({ images, name }: { images: string[], name: string }) => 
     const [activeImage, setActiveImage] = useState(images[0])
 
     return (
-        <div className="w-full max-w-md mx-auto">
+        <div className="w-full max-w-lg mx-auto">
             {/* Main Image Container */}
-            <div className="w-full mb-4">
+            <div className="w-full mb-6">
                 <Image
                     src={activeImage}
                     alt={`${name} result main`}
@@ -77,12 +77,12 @@ const ClientGallery = ({ images, name }: { images: string[], name: string }) => 
             </div>
 
             {/* Thumbnails */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-4">
                 {images.map((src, idx) => (
                     <button
                         key={idx}
                         onClick={() => setActiveImage(src)}
-                        className={`relative aspect-[3/4] rounded-md overflow-hidden bg-stone-50 border transition-all ${activeImage === src
+                        className={`relative aspect-[4/3] rounded-lg overflow-hidden bg-stone-50 border transition-all ${activeImage === src
                             ? "border-primary ring-1 ring-primary/20 opacity-100"
                             : "border-transparent opacity-60 hover:opacity-100"
                             }`}

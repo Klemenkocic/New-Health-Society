@@ -41,7 +41,7 @@ export function Navbar({ show = true }: { show?: boolean }) {
                 {/* Right: CTA / Menu */}
                 <div className="flex items-center gap-4">
                     <Link href="/consultation" className="hidden md:block">
-                        <span className="text-sm font-medium uppercase tracking-widest hover:underline underline-offset-4 decoration-1">Book Intake</span>
+                        <span className="text-sm font-medium uppercase tracking-widest hover:underline underline-offset-4 decoration-1">Book Free Initial Consultation</span>
                     </Link>
                     {/* Mobile Menu Trigger Placeholder */}
                     <button className="md:hidden uppercase text-sm font-medium tracking-widest">Menu</button>

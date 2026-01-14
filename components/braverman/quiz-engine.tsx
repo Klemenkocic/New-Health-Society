@@ -66,8 +66,12 @@ export function QuizEngine() {
     const progress = ((currentQuestionIndex + 1) / questions.length) * 100
 
     return (
-        <div className="w-full max-w-2xl mx-auto bg-white rounded-[var(--radius-xl)] shadow-[var(--shadow-large)] p-8 md:p-12 min-h-[500px] flex flex-col justify-center border border-foreground/5 relative overflow-hidden">
-            {/* Background texture or gradient could be added here for extra premium feel */}
+        <div className="w-full max-w-2xl mx-auto bg-gradient-to-br from-[#F3F0E5] to-[#F3F0E5]/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 md:p-12 min-h-[500px] flex flex-col justify-center border border-[#293133]/10 relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#293133] rounded-full blur-3xl transform translate-x-48 -translate-y-48" />
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary rounded-full blur-3xl transform -translate-x-48 translate-y-48" />
+            </div>
             <AnimatePresence mode="wait">
 
                 {/* INTRO */}
@@ -77,18 +81,18 @@ export function QuizEngine() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="text-center"
+                        className="text-center relative z-10"
                     >
-                        <h2 className="font-serif font-bold text-3xl mb-6">THE BRAVERMAN TEST</h2>
-                        <p className="font-inter text-foreground/70 mb-8 leading-relaxed">
+                        <h2 className="font-serif font-bold text-4xl md:text-5xl mb-6 text-[#293133]">THE BRAVERMAN TEST</h2>
+                        <p className="font-inter text-[#293133]/70 mb-8 leading-relaxed text-lg">
                             This assessment determines your neuro-chemical dominance and deficiencies.
                             It evaluates four key neurotransmitters: Dopamine, Acetylcholine, GABA, and Serotonin.
                             Your results will help us tailor your training, recovery, and nutrition protocols.
                         </p>
-                        <div className="text-sm font-mono text-foreground/40 mb-12">
+                        <div className="text-sm font-mono text-[#293133]/40 mb-12 tracking-wider">
                             EST TIME: 10 MIN • 160 QUESTIONS
                         </div>
-                        <Button onClick={() => setStep("quiz")} size="lg" className="w-full md:w-auto px-12">
+                        <Button onClick={() => setStep("quiz")} size="lg" className="w-full md:w-auto px-12 h-14 text-lg">
                             Start Assessment
                         </Button>
                     </motion.div>
@@ -101,37 +105,37 @@ export function QuizEngine() {
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -50 }}
-                        className="w-full"
+                        className="w-full relative z-10"
                     >
                         {/* Progress */}
-                        <div className="w-full h-1 bg-neutral-100 mb-12 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-[#293133]/10 mb-12 rounded-full overflow-hidden">
                             <motion.div
-                                className="h-full bg-primary"
+                                className="h-full bg-primary rounded-full"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
                                 transition={{ duration: 0.3 }}
                             />
                         </div>
 
-                        <div className="mb-4 text-xs font-mono text-foreground/30 uppercase tracking-widest">
+                        <div className="mb-4 text-xs font-mono text-[#293133]/40 uppercase tracking-widest">
                             Question {currentQuestionIndex + 1} / {questions.length}
                         </div>
 
-                        <h3 className="font-serif text-2xl md:text-3xl mb-12 leading-tight min-h-[120px] flex items-center">
+                        <h3 className="font-serif text-2xl md:text-3xl mb-12 leading-tight min-h-[120px] flex items-center text-[#293133]">
                             {questions[currentQuestionIndex]?.text || "Loading..."}
                         </h3>
 
                         <div className="flex gap-4">
                             <Button
                                 onClick={() => handleAnswer(true)}
-                                className="flex-1 h-16 text-lg bg-foreground hover:bg-foreground/90"
+                                className="flex-1 h-16 text-lg bg-[#293133] hover:bg-[#293133]/90 text-white rounded-xl"
                             >
                                 True
                             </Button>
                             <Button
                                 onClick={() => handleAnswer(false)}
                                 variant="outline"
-                                className="flex-1 h-16 text-lg"
+                                className="flex-1 h-16 text-lg rounded-xl border-[#293133]/20 hover:bg-[#293133]/5"
                             >
                                 False
                             </Button>
@@ -145,17 +149,17 @@ export function QuizEngine() {
                         key="email"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-center"
+                        className="text-center relative z-10"
                     >
-                        <div className="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div className="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <Check className="w-8 h-8" />
                         </div>
 
-                        <h2 className="font-serif font-bold text-3xl mb-4">ASSESSMENT COMPLETE!</h2>
-                        <p className="text-lg mb-8 text-foreground/80">
+                        <h2 className="font-serif font-bold text-4xl mb-4 text-[#293133]">ASSESSMENT COMPLETE!</h2>
+                        <p className="text-lg mb-8 text-[#293133]/80">
                             Receive your personalized Braverman Test results via email
                         </p>
-                        <p className="text-sm mb-8 text-foreground/60">
+                        <p className="text-sm mb-8 text-[#293133]/60">
                             We'll send you a comprehensive PDF report with your neurotransmitter profile,
                             detailed analysis, and personalized recommendations for training, nutrition, and supplementation.
                         </p>
@@ -165,14 +169,14 @@ export function QuizEngine() {
                             placeholder="your@email.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full p-4 border border-foreground/20 rounded-[var(--radius-md)] mb-6 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 text-lg transition-all duration-200"
+                            className="w-full p-4 border border-[#293133]/20 rounded-xl mb-6 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-lg transition-all duration-200 bg-white/50"
                         />
 
-                        <Button onClick={() => setStep("results")} disabled={!email} size="lg" className="w-full h-14 text-lg">
+                        <Button onClick={() => setStep("results")} disabled={!email} size="lg" className="w-full h-14 text-lg rounded-xl">
                             Send My Results <ArrowRight className="ml-2 w-5 h-5" />
                         </Button>
 
-                        <p className="text-xs text-foreground/40 mt-4">
+                        <p className="text-xs text-[#293133]/40 mt-4">
                             Your results will be sent within 24 hours
                         </p>
                     </motion.div>
@@ -184,41 +188,41 @@ export function QuizEngine() {
                         key="results"
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="text-center"
+                        className="text-center relative z-10"
                     >
-                        <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div className="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <Check className="w-8 h-8" />
                         </div>
 
-                        <h2 className="font-serif font-bold text-3xl mb-2">
+                        <h2 className="font-serif font-bold text-4xl mb-2 text-[#293133]">
                             RESULTS SENT!
                         </h2>
 
-                        <p className="text-foreground/70 mb-4 text-lg">
+                        <p className="text-[#293133]/70 mb-4 text-lg">
                             Check your inbox at <span className="font-bold text-primary">{email}</span>
                         </p>
 
-                        <p className="text-foreground/60 mb-8">
+                        <p className="text-[#293133]/60 mb-8">
                             Your personalized Braverman Test PDF report will arrive within 24 hours.
                         </p>
 
                         {/* Quick Preview */}
-                        <div className="bg-neutral-50 border border-neutral-200 p-6 rounded-sm mb-8 text-left">
-                            <h3 className="font-bold text-sm uppercase mb-4 text-center">Quick Preview</h3>
+                        <div className="bg-white/50 backdrop-blur-sm border border-[#293133]/10 p-6 rounded-2xl mb-8 text-left">
+                            <h3 className="font-bold text-sm uppercase mb-4 text-center text-[#293133]/60 tracking-wider">Quick Preview</h3>
 
                             <div className="mb-4">
-                                <p className="text-sm font-bold mb-2">Dominant Type:</p>
+                                <p className="text-sm font-bold mb-2 text-[#293133]/60">Dominant Type:</p>
                                 <p className="text-2xl font-serif font-bold text-primary">{results.dominant?.toUpperCase()}</p>
-                                <p className="text-sm text-foreground/70 italic mt-1">
+                                <p className="text-sm text-[#293133]/70 italic mt-1">
                                     {natureDescriptions[results.dominant as keyof typeof natureDescriptions]}
                                 </p>
                             </div>
 
                             <div className="space-y-3 mt-6">
-                                <p className="text-xs font-bold uppercase text-foreground/50">Balance Overview:</p>
+                                <p className="text-xs font-bold uppercase text-[#293133]/50 tracking-wider">Balance Overview:</p>
                                 {Object.entries(results.netScores).map(([key, score]) => (
                                     <div key={key} className="flex items-center justify-between">
-                                        <span className="text-sm capitalize">{key}</span>
+                                        <span className="text-sm capitalize text-[#293133]">{key}</span>
                                         <span className={`text-sm font-bold ${score >= 0 ? "text-green-600" : "text-red-600"}`}>
                                             {score > 0 ? "+" : ""}{score}
                                         </span>
@@ -229,10 +233,10 @@ export function QuizEngine() {
 
                         <div className="space-y-4">
                             <a href="/consultation">
-                                <Button className="w-full h-14 text-lg">Book Consultation for In-Depth Analysis</Button>
+                                <Button className="w-full h-14 text-lg rounded-xl">Book Consultation for In-Depth Analysis</Button>
                             </a>
                             <a href="/">
-                                <Button variant="outline" className="w-full h-14 text-lg">Return to Homepage</Button>
+                                <Button variant="outline" className="w-full h-14 text-lg rounded-xl border-[#293133]/20 hover:bg-[#293133]/5">Return to Homepage</Button>
                             </a>
                         </div>
                     </motion.div>

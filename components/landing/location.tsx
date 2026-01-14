@@ -269,9 +269,9 @@ export function LocationSection() {
                                         </button>
 
                                         {travelTime && (
-                                            <div className="bg-primary/10 border border-primary/20 rounded-lg px-4 py-3">
-                                                <p className="text-primary font-semibold text-sm">
-                                                    🚗 Travel time: {travelTime}
+                                            <div className="bg-[#293133]/5 border border-[#293133]/10 rounded-lg px-6 py-4">
+                                                <p className="text-[#293133] text-sm">
+                                                    <span className="font-bold">Travel time:</span> <span className="font-medium">{travelTime}</span>
                                                 </p>
                                             </div>
                                         )}

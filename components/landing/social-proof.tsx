@@ -60,9 +60,9 @@ const fallbackReviews = [
 
 export function SocialProofSection() {
     const [allReviews, setAllReviews] = React.useState<any[]>(fallbackReviews)
-    const [displayIndices, setDisplayIndices] = React.useState([0, 1, 2])
-    const [nextReviewIdx, setNextReviewIdx] = React.useState(3)
-    const [cycleStep, setCycleStep] = React.useState(0) // 0=Middle, 1=Left, 2=Right
+    const [displayIndices, setDisplayIndices] = React.useState([0, 1, 2, 3])
+    const [nextReviewIdx, setNextReviewIdx] = React.useState(4)
+    const [cycleStep, setCycleStep] = React.useState(0) // 0, 1, 2, 3 for four slots
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -113,18 +113,14 @@ export function SocialProofSection() {
 
     // Animation Cycle Logic
     React.useEffect(() => {
-        if (allReviews.length <= 3) return // No need to cycle if 3 or fewer reviews
+        if (allReviews.length <= 4) return // No need to cycle if 4 or fewer reviews
 
         const interval = setInterval(() => {
             setDisplayIndices(prev => {
                 const newIndices = [...prev]
 
-                // Determine which slot to update based on user request: Middle -> Left -> Right
-                // Slot indices: 0=Left, 1=Middle, 2=Right
-                let slotToUpdate = 1 // Default Middle
-
-                if (cycleStep === 1) slotToUpdate = 0 // Left
-                if (cycleStep === 2) slotToUpdate = 2 // Right
+                // Cycle through all 4 slots: 0, 1, 2, 3
+                const slotToUpdate = cycleStep
 
                 // Replace the review at this slot with the next available one
                 newIndices[slotToUpdate] = nextReviewIdx
@@ -133,7 +129,7 @@ export function SocialProofSection() {
 
             // Advance pointers
             setNextReviewIdx(prev => (prev + 1) % allReviews.length)
-            setCycleStep(prev => (prev + 1) % 3)
+            setCycleStep(prev => (prev + 1) % 4)
 
         }, 4000) // Change every 4 seconds
 
@@ -158,7 +154,7 @@ export function SocialProofSection() {
                 </div>
 
                 {/* Animated Grid */}
-                <div className="hidden md:grid grid-cols-3 gap-6">
+                <div className="hidden md:grid grid-cols-4 gap-6">
                     {displayIndices.map((reviewIndex, slotIndex) => {
                         const review = allReviews[reviewIndex] || allReviews[0]
                         return (
