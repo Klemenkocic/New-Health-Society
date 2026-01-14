@@ -8,15 +8,15 @@ import { basePath } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
 
-export function Navbar() {
+export function Navbar({ show = true }: { show?: boolean }) {
     const { scrollY } = useScroll()
     const pathname = usePathname()
     // Simplified Navbar: Always visible, always sticky/glassy
     return (
         <motion.nav
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: show ? 0 : -100, opacity: show ? 1 : 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: show ? 0.3 : 0 }}
             className="fixed top-0 left-0 right-0 z-50 py-6 px-6 md:px-12 text-[#293133]"
         >
             <div className="max-w-[1920px] mx-auto flex items-start justify-between">

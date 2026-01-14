@@ -46,9 +46,9 @@ function StepItem({ step }: { step: typeof steps[0] }) {
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!ref.current) return
         const rect = ref.current.getBoundingClientRect()
-        // Center the image on the cursor (assuming ~250px width / 180px height like AspectItem, adjust as needed)
-        x.set(e.clientX - rect.left - 125)
-        y.set(e.clientY - rect.top - 90)
+        // Center the image on the cursor (200px width / 140px height)
+        x.set(e.clientX - rect.left - 100)
+        y.set(e.clientY - rect.top - 70)
     }
 
     return (
@@ -57,7 +57,7 @@ function StepItem({ step }: { step: typeof steps[0] }) {
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative group border-b border-[#293133]/10 py-16 px-4 hover:bg-[#293133]/5 transition-colors duration-500 rounded-lg hover:z-30"
+            className="relative group border-b border-[#293133]/10 py-8 px-4 hover:bg-[#293133]/5 transition-colors duration-500 rounded-lg hover:z-30"
         // Note: overflow-hidden might clip the floating image if it goes too far? 
         // Actually, AspectItem used inline-block. Here we want full width. 
         // Let's TRY overflow-visible so image can float outside if needed, OR keep it clipped to the row. 
@@ -70,17 +70,17 @@ function StepItem({ step }: { step: typeof steps[0] }) {
 
                 {/* Number */}
                 <div className="md:col-span-2">
-                    <span className="font-mono text-xl md:text-2xl text-[#293133]/40">({step.id})</span>
+                    <span className="font-mono text-lg md:text-xl text-[#293133]/40">({step.id})</span>
                 </div>
 
                 {/* Title */}
                 <div className="md:col-span-4">
-                    <h3 className="font-serif text-3xl md:text-4xl font-medium">{step.title}</h3>
+                    <h3 className="font-serif text-2xl md:text-3xl font-medium">{step.title}</h3>
                 </div>
 
                 {/* Description */}
                 <div className="md:col-span-6">
-                    <p className="font-inter text-lg text-[#293133]/70 leading-relaxed max-w-xl">
+                    <p className="font-inter text-base text-[#293133]/70 leading-relaxed max-w-xl">
                         {step.description}
                     </p>
                 </div>
@@ -95,12 +95,12 @@ function StepItem({ step }: { step: typeof steps[0] }) {
                 }}
                 transition={{ duration: 0.2 }}
                 className={cn(
-                    "absolute top-0 left-0 z-10 pointer-events-none w-[250px] h-[180px] rounded-lg shadow-xl",
+                    "absolute top-0 left-0 z-10 pointer-events-none w-[200px] h-[140px] rounded-lg shadow-xl",
                     step.color
                 )}
             >
                 {/* Placeholder Content */}
-                <div className="w-full h-full flex items-center justify-center text-[#293133]/40 font-mono text-sm border border-black/5 bg-white/50 backdrop-blur-sm">
+                <div className="w-full h-full flex items-center justify-center text-[#293133]/40 font-mono text-xs border border-black/5 bg-white/50 backdrop-blur-sm">
                     [Image: {step.title}]
                 </div>
             </motion.div>
@@ -111,13 +111,13 @@ function StepItem({ step }: { step: typeof steps[0] }) {
 
 export function SolutionSection() {
     return (
-        <section className="pt-12 pb-32 px-6 md:px-12 bg-grainy-beige text-[#293133]">
+        <section className="pt-8 pb-16 px-6 md:px-12 bg-grainy-beige text-[#293133]">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-24 flex items-end justify-between border-b border-[#293133]/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-7xl">Your Journey</h2>
+                <div className="mb-12 flex items-end justify-between border-b border-[#293133]/10 pb-6">
+                    <h2 className="font-serif text-4xl md:text-6xl">Your Journey</h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                     {/* Empty 1/4 col */}
                     <div className="hidden lg:block lg:col-span-1"></div>
 

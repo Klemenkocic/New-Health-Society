@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { Hero } from "@/components/landing/hero"
@@ -12,11 +15,13 @@ import { LocationSection } from "@/components/landing/location"
 import { ClientResultsSection } from "@/components/landing/client-results"
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
-      <Navbar />
+  const [introComplete, setIntroComplete] = useState(false)
 
-      <Hero />
+  return (
+    <main className="min-h-screen text-foreground selection:bg-primary/20" style={{ backgroundColor: introComplete ? '#F3F0E5' : '#000000' }}>
+      <Navbar show={introComplete} />
+
+      <Hero onIntroComplete={() => setIntroComplete(true)} />
       <QuoteSection />
       <ProblemSection />
       <SolutionSection />

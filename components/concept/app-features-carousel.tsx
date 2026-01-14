@@ -582,17 +582,17 @@ export function AppFeaturesCarousel({
         {
             title: "Dein Health Score",
             description: "Ein Wert. Dein aktueller Stand. Berechnet aus all deinen Biomarkern – auf einen Blick erfassbar. Sieh sofort, wo du stehst und wie sich deine Gesundheit über Zeit entwickelt.",
-            image: `${basePath}/images/App/app-login.png`,
+            image: `${basePath}/images/App/app-calendar.png`,
         },
         {
             title: "Jeder Wert erklärt",
             description: "Was er bedeutet. Wo du stehst. Was optimal wäre. Keine Fachbegriffe ohne Kontext. Jeder Biomarker wird verständlich aufgeschlüsselt.",
-            image: `${basePath}/images/App/app-training.png`,
+            image: `${basePath}/images/App/app-calendar.png`,
         },
         {
             title: "Trends über Zeit",
             description: "Sieh, was sich bewegt. Nicht Momentaufnahmen – Entwicklung. Deine Biologie im Zeitverlauf. Erkenne Muster und optimiere gezielt.",
-            image: `${basePath}/images/App/app-progress.png`,
+            image: `${basePath}/images/App/app-calendar.png`,
         },
         {
             title: "Von Werten zu Handlung",

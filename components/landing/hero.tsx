@@ -15,7 +15,7 @@ const heroImages = [
     `${basePath}/images/gym/NHS Website-35.jpg`,
 ]
 
-export function Hero() {
+export function Hero({ onIntroComplete }: { onIntroComplete?: () => void }) {
     const [introComplete, setIntroComplete] = useState(false)
     const { scrollY } = useScroll()
 
@@ -23,16 +23,26 @@ export function Hero() {
     const y1 = useTransform(scrollY, [0, 1000], [0, -150])
     const y2 = useTransform(scrollY, [0, 1000], [0, -300])
 
+    const handleIntroComplete = () => {
+        setIntroComplete(true)
+        onIntroComplete?.()
+    }
+
     return (
-        <section className="relative min-h-screen w-full bg-grainy-beige text-[#293133] overflow-hidden">
+        <section className="relative min-h-screen w-full text-[#293133] overflow-hidden" style={{ backgroundColor: introComplete ? '#F3F0E5' : '#000000' }}>
             {/* Intro Animation Overlay */}
             <AnimatePresence>
                 {!introComplete && (
-                    <IntroAnimation onComplete={() => setIntroComplete(true)} />
+                    <IntroAnimation onComplete={handleIntroComplete} />
                 )}
             </AnimatePresence>
 
-            <div className="max-w-[1920px] mx-auto px-6 md:px-12 pt-32 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 min-h-screen">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: introComplete ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+                className="max-w-[1920px] mx-auto px-6 md:px-12 pt-32 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-12 min-h-screen"
+            >
 
                 {/* Left Column: Fixed Content */}
                 <div className="col-span-1 lg:col-span-5 flex flex-col justify-between h-full relative z-10">
@@ -147,17 +157,22 @@ export function Hero() {
                         />
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Marquee at the very bottom */}
-            <div className="absolute bottom-0 left-0 right-0 z-30 border-t border-[#293133]/10 bg-[#F3F0E5]">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: introComplete ? 1 : 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="absolute bottom-0 left-0 right-0 z-30 border-t border-[#293133]/10 bg-[#F3F0E5]"
+            >
                 <Marquee className="py-4 opacity-60 mix-blend-darken" repeat={4}>
                     <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Science Based Training</span>
                     <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Clinical Precision</span>
                     <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Measurable Results</span>
                     <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Private Atmosphere</span>
                 </Marquee>
-            </div>
+            </motion.div>
         </section>
     )
 }
