@@ -32,7 +32,7 @@ export function ThreeModelsSection() {
     const [activeId, setActiveId] = useState<string>("coaching")
 
     return (
-        <section className="py-24 px-6 md:px-12 bg-grainy-beige min-h-[800px]">
+        <section className="py-24 px-6 md:px-12 bg-transparent min-h-[800px]">
             <div className="max-w-7xl mx-auto h-full flex flex-col gap-12">
                 {/* Header - Full Width */}
                 <div className="w-full flex-none border-b border-[#293133]/10 pb-8">

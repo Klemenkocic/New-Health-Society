@@ -72,7 +72,7 @@ export function CareersSection() {
     }
 
     return (
-        <section id="careers" className="py-24 px-6 md:px-12 bg-grainy-beige">
+        <section id="careers" className="py-24 px-6 md:px-12 bg-transparent">
             <div className="max-w-5xl mx-auto">
                 {/* Section Header - Consistent with other pages */}
                 <div className="border-b border-[#293133]/10 pb-8 mb-16">

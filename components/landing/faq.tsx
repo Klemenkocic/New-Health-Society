@@ -27,7 +27,7 @@ export function FaqSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0)
 
     return (
-        <section className="py-24 px-6 md:px-12 bg-grainy-beige">
+        <section className="py-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
                     {/* Title Column */}

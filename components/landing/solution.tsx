@@ -121,7 +121,7 @@ export function SolutionSection() {
     const direction = getDirection()
 
     return (
-        <section className="pt-8 pb-16 px-6 md:px-12 bg-grainy-beige text-[#293133]">
+        <section className="pt-8 pb-16 px-6 md:px-12 text-[#293133]">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-12 flex items-end justify-between border-b border-[#293133]/10 pb-6">
                     <h2 className="font-serif text-4xl md:text-6xl">Your Journey</h2>

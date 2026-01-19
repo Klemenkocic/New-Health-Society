@@ -31,7 +31,7 @@ const principles = [
 
 export function PrinciplesSection() {
     return (
-        <section className="min-h-screen flex items-center justify-center py-24 px-4 md:px-12 bg-grainy-beige overflow-hidden">
+        <section className="min-h-screen flex items-center justify-center py-24 px-4 md:px-12 bg-transparent overflow-hidden">
             <div className="w-full max-w-[1600px] h-full flex flex-col justify-center">
 
                 {/* Section Header */}

@@ -17,23 +17,32 @@ import { ClientResultsSection } from "@/components/landing/client-results"
 export default function Home() {
   const [introComplete, setIntroComplete] = useState(false)
   const [skipIntro, setSkipIntro] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Check if user has already seen the intro
-    const hasSeenIntro = localStorage.getItem('hasSeenIntro')
+    // Check if user has already seen the intro in this session
+    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro')
     if (hasSeenIntro === 'true') {
       setSkipIntro(true)
       setIntroComplete(true)
     }
+    setIsLoading(false)
   }, [])
 
   const handleIntroComplete = () => {
     setIntroComplete(true)
-    localStorage.setItem('hasSeenIntro', 'true')
+    sessionStorage.setItem('hasSeenIntro', 'true')
+  }
+
+  // Don't render anything until we've checked sessionStorage
+  if (isLoading) {
+    return (
+      <main className="min-h-screen" style={{ backgroundColor: '#000000' }} />
+    )
   }
 
   return (
-    <main className="min-h-screen text-foreground selection:bg-primary/20" style={{ backgroundColor: introComplete ? '#F3F0E5' : '#000000' }}>
+    <main className="min-h-screen text-foreground selection:bg-primary/20" style={{ backgroundColor: introComplete ? 'transparent' : '#000000' }}>
       <Navbar show={introComplete} />
 
       <Hero onIntroComplete={handleIntroComplete} skipIntro={skipIntro} />

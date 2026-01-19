@@ -8,7 +8,7 @@ import { basePath } from "@/lib/utils"
 
 export function AboutHero() {
     return (
-        <section className="relative min-h-screen w-full bg-grainy-beige px-6 md:px-12 pt-32 pb-12 overflow-hidden">
+        <section className="relative min-h-screen w-full bg-transparent px-6 md:px-12 pt-32 pb-12 overflow-hidden">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[800px]">
 
                 {/* Left Column: Content */}

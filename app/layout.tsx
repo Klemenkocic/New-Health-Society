@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { basePath } from "@/lib/utils";
 import Script from "next/script";
 import "./globals.css";
+import BackgroundBlobs from "@/components/layout/background-blobs";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,11 +56,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
-          <div className="bg-blob blob-primary top-[-10%] left-[-10%] animate-pulse" style={{ animationDuration: '8s' }}></div>
-          <div className="bg-blob blob-accent bottom-[-10%] right-[-10%] animate-pulse" style={{ animationDuration: '10s' }}></div>
-          <div className="bg-blob blob-primary top-[40%] right-[20%] opacity-30 animate-pulse" style={{ animationDuration: '12s' }}></div>
-        </div>
+        <BackgroundBlobs />
         {children}
       </body>
     </html>

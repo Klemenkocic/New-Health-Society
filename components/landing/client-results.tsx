@@ -129,7 +129,7 @@ const ClientInfo = ({ client }: { client: typeof clients[0] }) => (
 
 export function ClientResultsSection() {
     return (
-        <section className="py-12 px-6 md:px-12 bg-grainy-beige text-[#293133]">
+        <section className="py-12 px-6 md:px-12 text-[#293133]">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-24 border-b border-[#293133]/10 pb-8">
                     <h2 className="font-serif text-5xl md:text-7xl text-[#293133] mb-4">Real Results</h2>

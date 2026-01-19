@@ -29,7 +29,7 @@ export function Hero({ onIntroComplete, skipIntro = false }: { onIntroComplete?:
     }
 
     return (
-        <section className="relative min-h-screen w-full text-[#293133] overflow-hidden" style={{ backgroundColor: introComplete ? '#F3F0E5' : '#000000' }}>
+        <section className="relative min-h-screen w-full text-[#293133] overflow-hidden" style={{ backgroundColor: introComplete ? 'transparent' : '#000000' }}>
             {/* Intro Animation Overlay */}
             <AnimatePresence>
                 {!introComplete && (
@@ -164,7 +164,7 @@ export function Hero({ onIntroComplete, skipIntro = false }: { onIntroComplete?:
                 initial={{ opacity: 0 }}
                 animate={{ opacity: introComplete ? 1 : 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="absolute bottom-0 left-0 right-0 z-30 border-t border-[#293133]/10 bg-[#F3F0E5]"
+                className="absolute bottom-0 left-0 right-0 z-30 border-t border-[#293133]/10"
             >
                 <Marquee className="py-4 opacity-60 mix-blend-darken" repeat={4}>
                     <span className="mx-8 font-mono text-xs uppercase tracking-[0.2em]">• Science Based Training</span>

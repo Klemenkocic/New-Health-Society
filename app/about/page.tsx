@@ -10,7 +10,7 @@ import { CareersSection } from "@/components/about/careers"
 
 export default function AboutPage() {
     return (
-        <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
+        <main className="min-h-screen bg-transparent text-foreground selection:bg-primary/20">
             <Navbar />
 
             <AboutHero />

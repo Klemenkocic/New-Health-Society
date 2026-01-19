@@ -27,7 +27,7 @@ const values = [
 
 export function ValuesSection() {
     return (
-        <section className="py-24 px-6 md:px-12 bg-grainy-beige">
+        <section className="py-24 px-6 md:px-12 bg-transparent">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <div className="border-b border-[#293133]/10 pb-8 mb-16">

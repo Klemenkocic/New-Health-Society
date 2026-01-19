@@ -35,11 +35,12 @@ export function LocationSection() {
     const onPlaceChanged = () => {
         if (autocompleteRef.current) {
             const place = autocompleteRef.current.getPlace()
-            if (place.formatted_address) {
-                setAddress(place.formatted_address)
+            const address = place.formatted_address
+            if (address) {
+                setAddress(address)
                 // Automatically calculate route when address is selected
                 setTimeout(() => {
-                    calculateRouteWithAddress(place.formatted_address)
+                    calculateRouteWithAddress(address)
                 }, 100)
             }
         }
@@ -184,7 +185,7 @@ export function LocationSection() {
     }), [])
 
     return (
-        <section className="py-12 md:pb-24 px-6 md:px-12 bg-grainy-beige">
+        <section className="py-12 md:pb-24 px-6 md:px-12">
             <div className="max-w-[1920px] mx-auto flex flex-col lg:flex-row gap-8">
                 {/* Map Side (Left) */}
                 <div className="w-full lg:w-[65%] h-[500px] lg:h-[700px] bg-neutral-900 relative group overflow-hidden rounded-3xl shadow-lg">

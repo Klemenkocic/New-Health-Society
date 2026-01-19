@@ -5,4 +5,4 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-export const basePath = '/New-Health-Society';
+export const basePath = process.env.NODE_ENV === 'production' ? '/New-Health-Society' : '';

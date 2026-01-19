@@ -58,7 +58,7 @@ export function AllHealthAspectsSection() {
     const selectedItem = selectedId ? aspects.find(a => a.id === selectedId) : null
 
     return (
-        <section className="py-12 px-6 md:px-12 bg-grainy-beige">
+        <section className="py-12 px-6 md:px-12 bg-transparent">
             <div className="max-w-7xl mx-auto">
                 <div className="w-full mb-8 border-b border-[#293133]/10 pb-6">
                     <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">

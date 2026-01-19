@@ -620,7 +620,7 @@ export function AppFeaturesCarousel({
     return (
         <section
             ref={sectionRef}
-            className="w-full bg-grainy-beige overflow-hidden"
+            className="w-full bg-transparent overflow-hidden"
             style={{
                 fontFamily: "'Inter', sans-serif",
                 padding: isMobile ? "60px 20px" : isTablet ? "80px 40px" : "120px 60px",

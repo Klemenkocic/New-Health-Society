@@ -27,7 +27,7 @@ export function GymGallerySection() {
     const marqueeImages = [...studioImages, ...studioImages, ...studioImages]
 
     return (
-        <section className="py-24 bg-grainy-beige overflow-hidden">
+        <section className="py-24 bg-transparent overflow-hidden">
             <div className="max-w-[1920px] mx-auto">
                 <div className="px-6 md:px-12 mb-12 md:mb-16 max-w-7xl mx-auto">
                     <div className="w-full border-b border-[#293133]/10 pb-8">

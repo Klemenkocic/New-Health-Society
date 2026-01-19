@@ -22,7 +22,7 @@ const coaches = [
 
 export function CoachingTeamSection() {
     return (
-        <section className="py-24 px-6 md:px-12 bg-grainy-beige border-t border-foreground/5">
+        <section className="py-24 px-6 md:px-12 bg-transparent border-t border-foreground/5">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header - Consistent with other pages */}
                 <div className="border-b border-[#293133]/10 pb-8 mb-16">

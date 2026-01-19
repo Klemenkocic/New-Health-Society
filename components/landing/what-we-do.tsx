@@ -95,7 +95,7 @@ export function WhatWeDoSection() {
     const direction = getDirection()
 
     return (
-        <section className="py-32 px-6 bg-grainy-beige overflow-hidden min-h-screen flex items-center">
+        <section className="py-32 px-6 overflow-hidden min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto text-center relative w-full">
                 <div className="mb-24 flex items-end justify-between border-b border-[#293133]/10 pb-8">
                     <motion.h2
