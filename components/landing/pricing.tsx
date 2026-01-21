@@ -120,17 +120,20 @@ export function PricingSection() {
                         <h3 className="font-serif font-bold text-2xl mb-2">Personal Training</h3>
 
                         {/* Frequency Toggle (Dark Mode for Light Card) */}
-                        <div className="flex items-center gap-2 mb-4 bg-black/5 p-1 rounded-lg w-fit">
-                            {[2, 3, 4].map((f) => (
-                                <button
-                                    key={f}
-                                    onClick={() => setPersonalFreq(f as Frequency)}
-                                    className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${personalFreq === f ? "bg-[#293133] text-white" : "text-[#293133]/60 hover:text-[#293133]"
-                                        }`}
-                                >
-                                    {f}x
-                                </button>
-                            ))}
+                        <div className="flex items-center gap-2 mb-4 w-fit">
+                            <div className="flex items-center gap-2 bg-black/5 p-1 rounded-lg">
+                                {[2, 3, 4].map((f) => (
+                                    <button
+                                        key={f}
+                                        onClick={() => setPersonalFreq(f as Frequency)}
+                                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${personalFreq === f ? "bg-[#293133] text-white" : "text-[#293133]/60 hover:text-[#293133]"
+                                            }`}
+                                    >
+                                        {f}x
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="text-[10px] text-[#293133]/40 ml-2 italic whitespace-nowrap">est. per week</span>
                         </div>
 
                         <div className="flex items-baseline mb-6">
@@ -170,17 +173,20 @@ export function PricingSection() {
                         <h3 className="font-serif font-bold text-2xl mb-2">Group Training</h3>
 
                         {/* Frequency Toggle */}
-                        <div className="flex items-center gap-2 mb-4 bg-black/5 p-1 rounded-lg w-fit">
-                            {[2, 3, 4].map((f) => (
-                                <button
-                                    key={f}
-                                    onClick={() => setGroupFreq(f as Frequency)}
-                                    className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${groupFreq === f ? "bg-[#293133] text-white" : "text-[#293133]/60 hover:text-[#293133]"
-                                        }`}
-                                >
-                                    {f}x
-                                </button>
-                            ))}
+                        <div className="flex items-center gap-2 mb-4 w-fit">
+                            <div className="flex items-center gap-2 bg-black/5 p-1 rounded-lg">
+                                {[2, 3, 4].map((f) => (
+                                    <button
+                                        key={f}
+                                        onClick={() => setGroupFreq(f as Frequency)}
+                                        className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${groupFreq === f ? "bg-[#293133] text-white" : "text-[#293133]/60 hover:text-[#293133]"
+                                            }`}
+                                    >
+                                        {f}x
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="text-[10px] text-[#293133]/40 ml-2 italic whitespace-nowrap">est. per week</span>
                         </div>
 
                         <div className="flex items-baseline mb-6">
