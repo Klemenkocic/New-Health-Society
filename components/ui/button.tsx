@@ -1,21 +1,16 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-// I'm skipping class-variance-authority install for now and just writing a simple button to save time/dependencies, 
-// strictly following the brand design.
-// Actually, I didn't install cva. I'll write a simple functional component.
+// Custom button component following the NHS brand design system
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: "primary" | "outline" | "ghost" | "link" | "glass" | "link-uppercase"
-    size?: "default" | "sm" | "lg"
+    size?: "default" | "sm" | "lg" | "icon"
     asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = "primary", size = "default", asChild = false, ...props }, ref) => {
-        const Comp = asChild ? Slot : "button"
+    ({ className, variant = "primary", size = "default", ...props }, ref) => {
 
         const baseStyles = "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--radius-md)] text-sm font-medium ring-offset-background transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 

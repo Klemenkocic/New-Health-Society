@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Check, Info } from "lucide-react"
+import { Check } from "lucide-react"
 
 // Types for our pricing structure
 type Frequency = 2 | 3 | 4
@@ -68,15 +68,15 @@ export function PricingSection() {
     const personalData = getPersonalData(personalFreq)
 
     return (
-        <section className="py-24 px-6 md:px-12">
+        <section className="py-12 md:py-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-12 border-b border-[#293133]/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-7xl text-[#26538D] mb-4">Invest In Yourself</h2>
+                <div className="mb-8 md:mb-12 border-b border-[#293133]/10 pb-8">
+                    <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-[#26538D] mb-4">Invest In Yourself</h2>
                     <p className="text-[#293133]/60 font-inter text-lg">Transparent pricing. No hidden fees.</p>
                 </div>
 
                 {/* PRICING CARDS */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 md:mb-12">
                     {/* 1. COACHING (Fixed) */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { motion, useAnimationControls } from "framer-motion"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { basePath } from "@/lib/utils"
 
 // Specific images requested for the Studio section
@@ -27,9 +27,9 @@ export function GymGallerySection() {
     const marqueeImages = [...studioImages, ...studioImages, ...studioImages]
 
     return (
-        <section className="py-24 bg-transparent overflow-hidden">
+        <section className="py-12 md:py-24 bg-transparent overflow-hidden">
             <div className="max-w-[1920px] mx-auto">
-                <div className="px-6 md:px-12 mb-12 md:mb-16 max-w-7xl mx-auto">
+                <div className="px-6 md:px-12 mb-8 md:mb-12 max-w-7xl mx-auto">
                     <div className="w-full border-b border-[#293133]/10 pb-8">
                         <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
                             The Studio
@@ -56,10 +56,12 @@ function MarqueeContent({ images }: { images: string[] }) {
     const controls = useAnimationControls()
 
     useEffect(() => {
+        // Faster speed on mobile for better visual feedback
+        const isMobile = window.innerWidth < 768
         controls.start({
             x: "-50%",
             transition: {
-                duration: 60, // Slow speed (adjust as needed)
+                duration: isMobile ? 30 : 60, // Faster on mobile
                 ease: "linear",
                 repeat: Infinity,
                 repeatType: "loop"
@@ -73,10 +75,24 @@ function MarqueeContent({ images }: { images: string[] }) {
             animate={controls}
             onMouseEnter={() => controls.stop()}
             onMouseLeave={() => {
+                const isMobile = window.innerWidth < 768
                 controls.start({
                     x: "-50%",
                     transition: {
-                        duration: 60, // Must match initial duration
+                        duration: isMobile ? 30 : 60, // Must match initial duration
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "loop"
+                    }
+                })
+            }}
+            onTouchStart={() => controls.stop()}
+            onTouchEnd={() => {
+                const isMobile = window.innerWidth < 768
+                controls.start({
+                    x: "-50%",
+                    transition: {
+                        duration: isMobile ? 30 : 60,
                         ease: "linear",
                         repeat: Infinity,
                         repeatType: "loop"

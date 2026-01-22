@@ -6,12 +6,12 @@ import { basePath } from "@/lib/utils"
 
 export function ProblemSection() {
     return (
-        <section className="min-h-screen flex items-center justify-center py-24 px-4 md:px-12 overflow-hidden">
+        <section className="min-h-screen flex items-center justify-center py-12 md:py-24 px-4 md:px-12 overflow-hidden">
             <div className="w-full max-w-[1600px] h-full flex flex-col justify-center">
 
                 {/* Header for Context */}
-                <div className="mb-12 md:mb-16 border-b border-[#293133]/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
+                <div className="mb-8 md:mb-16 border-b border-[#293133]/10 pb-8">
+                    <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-[#293133]">
                         We Provide
                     </h2>
                 </div>

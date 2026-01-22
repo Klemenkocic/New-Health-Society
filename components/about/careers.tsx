@@ -212,7 +212,7 @@ export function CareersSection() {
                 {/* General Inquiry */}
                 <div className="mt-12 text-center">
                     <p className="text-[#293133]/60 mb-4">
-                        Don't see your role?
+                        Don&apos;t see your role?
                     </p>
                     <a
                         href="mailto:careers@newhealthsociety.com?subject=General Inquiry"

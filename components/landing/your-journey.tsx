@@ -58,7 +58,7 @@ export function YourJourneySection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl text-foreground"
+                        className="font-sans font-bold text-2xl md:text-4xl lg:text-6xl text-foreground"
                     >
                         YOUR JOURNEY
                     </motion.h2>

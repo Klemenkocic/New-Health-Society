@@ -53,7 +53,9 @@ const useBreakpoint = () => {
 // ===========================================
 // CARD ILLUSTRATIONS (Abstracted App Views)
 // ===========================================
+// Note: These illustration components are currently unused but kept for potential future use
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 function HealthScoreIllustration() {
     return (
         <div
@@ -550,6 +552,7 @@ function NavDots({ activeIndex, setActiveIndex, totalCards }: { activeIndex: num
         </div>
     )
 }
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 // ===========================================
 // MAIN COMPONENT
@@ -563,8 +566,6 @@ interface AppFeaturesCarouselProps {
 }
 
 export function AppFeaturesCarousel({
-    headingText = "Deine Werte. Sichtbar gemacht.",
-    subheadingText = "Verstehe, was passiert. Sieh, was sich verändert.",
     autoRotate = true,
     autoRotateDelay = 5,
 }: AppFeaturesCarouselProps) {
@@ -657,6 +658,8 @@ export function AppFeaturesCarousel({
                         style={{ position: "relative", height: isMobile ? "480px" : "600px" }}
                         onMouseEnter={() => setIsPaused(true)}
                         onMouseLeave={() => setIsPaused(false)}
+                        onTouchStart={() => setIsPaused(true)}
+                        onTouchEnd={() => setIsPaused(false)}
                     >
                         {/* Glow */}
                         <div

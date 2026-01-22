@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useRef, MouseEvent, useEffect } from "react"
+import { useState, useRef, useEffect, MouseEvent } from "react"
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
-import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { basePath } from "@/lib/utils"
+import { ImageModal } from "@/components/ui/image-modal"
 
 const steps = [
     {
@@ -43,15 +43,17 @@ const steps = [
 
 interface StepItemProps {
     step: typeof steps[0]
-    onHover: () => void
-    onLeave: () => void
+    onHover?: () => void
+    onLeave?: () => void
+    onTap?: () => void
 }
 
-function StepItem({ step, onHover, onLeave }: StepItemProps) {
+function StepItem({ step, onHover, onLeave, onTap }: StepItemProps) {
     return (
         <motion.div
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
+            onClick={onTap}
             className="relative group border-b border-[#293133]/10 py-8 px-4 hover:bg-[#293133]/5 transition-colors duration-300 rounded-lg cursor-default"
         >
             <div className="relative z-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline pointer-events-none">
@@ -78,8 +80,18 @@ function StepItem({ step, onHover, onLeave }: StepItemProps) {
 
 export function SolutionSection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-    const [previousIndex, setPreviousIndex] = useState<number | null>(null)
+    const [selectedImage, setSelectedImage] = useState<typeof steps[0] | null>(null)
+    const [isMobile, setIsMobile] = useState(false)
+    const previousIndexRef = useRef<number | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
+
+    // Mobile detection
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     // Cursor position motion values
     const x = useMotionValue(0)
@@ -88,13 +100,6 @@ export function SolutionSection() {
     // Instant spring physics - no delay
     const mouseX = useSpring(x, { stiffness: 200, damping: 10, mass: 0.1 })
     const mouseY = useSpring(y, { stiffness: 200, damping: 10, mass: 0.1 })
-
-    // Track hover changes for direction
-    useEffect(() => {
-        if (hoveredIndex !== null && hoveredIndex !== previousIndex) {
-            setPreviousIndex(hoveredIndex)
-        }
-    }, [hoveredIndex, previousIndex])
 
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return
@@ -105,25 +110,27 @@ export function SolutionSection() {
     }
 
     const handleHover = (index: number) => {
+        previousIndexRef.current = hoveredIndex
         setHoveredIndex(index)
     }
 
     const handleLeave = () => {
+        previousIndexRef.current = hoveredIndex
         setHoveredIndex(null)
     }
 
-    // Determine slide direction
-    const getDirection = () => {
-        if (hoveredIndex === null || previousIndex === null) return "none"
-        return hoveredIndex > previousIndex ? "up" : "down"
-    }
-
-    const direction = getDirection()
+    // Compute direction without triggering effects
+    /* eslint-disable react-hooks/refs */
+    const direction = ((): "up" | "down" | "none" => {
+        if (hoveredIndex === null || previousIndexRef.current === null) return "none"
+        return hoveredIndex > previousIndexRef.current ? "up" : "down"
+    /* eslint-enable react-hooks/refs */
+    })()
 
     return (
-        <section className="pt-8 pb-16 px-6 md:px-12 text-[#293133]">
+        <section className="py-12 md:pt-8 md:pb-16 px-6 md:px-12 text-[#293133]">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-12 flex items-end justify-between border-b border-[#293133]/10 pb-6">
+                <div className="mb-8 md:mb-12 flex items-end justify-between border-b border-[#293133]/10 pb-6">
                     <h2 className="font-serif text-4xl md:text-6xl">Your Journey</h2>
                 </div>
 
@@ -141,13 +148,14 @@ export function SolutionSection() {
                             <StepItem
                                 key={step.id}
                                 step={step}
-                                onHover={() => handleHover(step.index)}
-                                onLeave={handleLeave}
+                                onHover={!isMobile ? () => handleHover(step.index) : undefined}
+                                onLeave={!isMobile ? handleLeave : undefined}
+                                onTap={isMobile ? () => setSelectedImage(step) : undefined}
                             />
                         ))}
 
-                        {/* Shared Cursor-Following Image Container - Only visible when hovering */}
-                        {hoveredIndex !== null && (
+                        {/* Shared Cursor-Following Image Container - Only visible when hovering on desktop */}
+                        {!isMobile && hoveredIndex !== null && (
                             <motion.div
                                 style={{ x: mouseX, y: mouseY }}
                                 initial={{ opacity: 0 }}
@@ -193,6 +201,16 @@ export function SolutionSection() {
                                 </AnimatePresence>
                             </motion.div>
                         )}
+
+                        {/* Mobile Image Modal */}
+                        <ImageModal
+                            isOpen={selectedImage !== null}
+                            onClose={() => setSelectedImage(null)}
+                            imageSrc={selectedImage?.image || ''}
+                            imageAlt={selectedImage?.title || ''}
+                            title={selectedImage?.title}
+                            description={selectedImage?.description}
+                        />
                     </div>
                 </div>
             </div>

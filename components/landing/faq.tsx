@@ -27,12 +27,12 @@ export function FaqSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0)
 
     return (
-        <section className="py-24 px-6 md:px-12">
+        <section className="py-12 md:py-24 px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
                     {/* Title Column */}
                     <div className="md:col-span-4 md:sticky md:top-24 h-fit">
-                        <h2 className="font-serif text-5xl md:text-7xl text-foreground mb-8">FAQ</h2>
+                        <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-foreground mb-8">FAQ</h2>
                         <p className="font-inter text-foreground/60 text-lg max-w-sm">
                             Answers to common questions about our training philosophy and logistics.
                         </p>

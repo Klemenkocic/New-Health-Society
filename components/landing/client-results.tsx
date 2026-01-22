@@ -108,7 +108,7 @@ const ClientInfo = ({ client }: { client: typeof clients[0] }) => (
                 <span className="font-mono text-sm text-[#293133]/40">AGE {client.age}</span>
             </div>
             <p className="font-serif italic text-2xl md:text-3xl text-foreground leading-relaxed">
-                "{client.quote}"
+                &ldquo;{client.quote}&rdquo;
             </p>
         </div>
 
@@ -129,16 +129,16 @@ const ClientInfo = ({ client }: { client: typeof clients[0] }) => (
 
 export function ClientResultsSection() {
     return (
-        <section className="py-12 px-6 md:px-12 text-[#293133]">
+        <section className="py-12 md:py-24 px-6 md:px-12 text-[#293133]">
             <div className="max-w-6xl mx-auto">
-                <div className="mb-24 border-b border-[#293133]/10 pb-8">
-                    <h2 className="font-serif text-5xl md:text-7xl text-[#293133] mb-4">Real Results</h2>
+                <div className="mb-12 md:mb-24 border-b border-[#293133]/10 pb-8">
+                    <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-[#293133] mb-4">Real Results</h2>
                     <p className="text-[#293133]/60 font-inter max-w-xl text-lg">
                         See the tangible transformations achieved through our clinical precision training.
                     </p>
                 </div>
 
-                <div className="space-y-32">
+                <div className="space-y-16 md:space-y-32">
                     {clients.map((client, index) => (
                         <motion.div
                             key={client.id}

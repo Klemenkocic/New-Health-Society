@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import Image from "next/image"
 import { basePath } from "@/lib/utils"
 
 export function ConceptHero() {

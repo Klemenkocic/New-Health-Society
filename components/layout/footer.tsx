@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Instagram, Linkedin, Mail } from "lucide-react"
+import { Instagram, Linkedin } from "lucide-react"
 
 export function Footer() {
     return (
@@ -34,14 +34,11 @@ export function Footer() {
 
                         <div className="flex flex-col gap-8 font-inter">
                             <div className="flex gap-4">
-                                <a href="#" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">
+                                <a href="https://www.instagram.com/newhealthsociety/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors opacity-80 hover:opacity-100" aria-label="Instagram">
                                     <Instagram className="w-5 h-5" />
                                 </a>
-                                <a href="#" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">
+                                <a href="https://www.linkedin.com/company/newhealthsociety/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors opacity-80 hover:opacity-100" aria-label="LinkedIn">
                                     <Linkedin className="w-5 h-5" />
-                                </a>
-                                <a href="mailto:info@newhealthsociety.com" className="hover:text-primary transition-colors opacity-80 hover:opacity-100">
-                                    <Mail className="w-5 h-5" />
                                 </a>
                             </div>
 
@@ -60,7 +57,7 @@ export function Footer() {
             {/* ROW 2: QUOTE */}
             <div className="w-full text-center py-12 md:py-16 px-6 border-b border-[#F3F0E5]/10 bg-[#293133]">
                 <h2 className="font-serif italic text-2xl md:text-3xl text-[#F3F0E5] leading-relaxed max-w-4xl mx-auto opacity-80">
-                    "Longevity,<br />Invest in the years that count"
+                    &ldquo;Longevity,<br />Invest in the years that count&rdquo;
                 </h2>
             </div>
 
@@ -70,9 +67,9 @@ export function Footer() {
                     &copy; {new Date().getFullYear()} NEW HEALTH SOCIETY.
                 </div>
                 <div className="flex flex-col md:flex-row gap-4 md:gap-8 text-center md:text-right">
-                    <Link href="#" className="hover:text-primary transition-colors">Imprint</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
-                    <Link href="#" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+                    <Link href="/imprint" className="hover:text-primary transition-colors">Imprint</Link>
+                    <Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                    <Link href="/terms" className="hover:text-primary transition-colors">Terms & Conditions</Link>
                 </div>
             </div>
         </footer>

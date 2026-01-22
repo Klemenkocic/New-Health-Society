@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useRef, MouseEvent, useEffect } from "react"
+import { useState, useRef, useEffect, MouseEvent } from "react"
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { basePath } from "@/lib/utils"
+import { ImageModal } from "@/components/ui/image-modal"
 
 const aspects = [
     { index: 0, title: "Strength training", color: "bg-blue-100", image: `${basePath}/images/gym/NHS Website-14.jpg` },
@@ -24,19 +25,25 @@ const aspects = [
 interface AspectItemProps {
     title: string
     isHovered: boolean
-    onHover: () => void
-    onLeave: () => void
+    isMobile: boolean
+    onHover?: () => void
+    onLeave?: () => void
+    onTap?: () => void
 }
 
-function AspectItem({ title, isHovered, onHover, onLeave }: AspectItemProps) {
+function AspectItem({ title, isHovered, isMobile, onHover, onLeave, onTap }: AspectItemProps) {
     return (
         <motion.div
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
+            onClick={onTap}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative cursor-none inline-block m-2"
+            className={cn(
+                "relative inline-block m-2",
+                !isMobile && "cursor-none"
+            )}
         >
             <span
                 className={cn(
@@ -52,8 +59,18 @@ function AspectItem({ title, isHovered, onHover, onLeave }: AspectItemProps) {
 
 export function WhatWeDoSection() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-    const [previousIndex, setPreviousIndex] = useState<number | null>(null)
+    const [selectedImage, setSelectedImage] = useState<typeof aspects[0] | null>(null)
+    const [isMobile, setIsMobile] = useState(false)
+    const previousIndexRef = useRef<number | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
+
+    // Mobile detection
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     // Cursor position motion values
     const x = useMotionValue(0)
@@ -62,13 +79,6 @@ export function WhatWeDoSection() {
     // Instant spring physics - no delay
     const mouseX = useSpring(x, { stiffness: 200, damping: 10, mass: 0.1 })
     const mouseY = useSpring(y, { stiffness: 200, damping: 10, mass: 0.1 })
-
-    // Track hover changes for direction
-    useEffect(() => {
-        if (hoveredIndex !== null && hoveredIndex !== previousIndex) {
-            setPreviousIndex(hoveredIndex)
-        }
-    }, [hoveredIndex, previousIndex])
 
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!containerRef.current) return
@@ -79,53 +89,76 @@ export function WhatWeDoSection() {
     }
 
     const handleHover = (index: number) => {
+        previousIndexRef.current = hoveredIndex
         setHoveredIndex(index)
     }
 
     const handleLeave = () => {
+        previousIndexRef.current = hoveredIndex
         setHoveredIndex(null)
     }
 
-    // Determine slide direction
-    const getDirection = () => {
-        if (hoveredIndex === null || previousIndex === null) return "none"
-        return hoveredIndex > previousIndex ? "up" : "down"
-    }
-
-    const direction = getDirection()
+    // Compute direction without triggering effects
+    /* eslint-disable react-hooks/refs */
+    const direction = ((): "up" | "down" | "none" => {
+        if (hoveredIndex === null || previousIndexRef.current === null) return "none"
+        return hoveredIndex > previousIndexRef.current ? "up" : "down"
+    /* eslint-enable react-hooks/refs */
+    })()
 
     return (
-        <section className="py-32 px-6 overflow-hidden min-h-screen flex items-center">
+        <section className="py-16 md:py-32 px-6 overflow-hidden md:min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto text-center relative w-full">
                 <div className="mb-24 flex items-end justify-between border-b border-[#293133]/10 pb-8">
                     <motion.h2
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="font-serif text-5xl md:text-7xl text-[#293133] relative z-30"
+                        className="font-serif text-3xl md:text-5xl lg:text-7xl text-[#293133] relative z-30"
                     >
                         All Health Aspects
                     </motion.h2>
                 </div>
 
-                {/* Scattered Cloud Layout */}
-                <div
-                    ref={containerRef}
-                    className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-6xl mx-auto mb-24 relative z-20"
-                    onMouseMove={handleMouseMove}
-                >
-                    {aspects.map((aspect) => (
-                        <AspectItem
-                            key={aspect.title}
-                            title={aspect.title}
-                            isHovered={hoveredIndex === aspect.index}
-                            onHover={() => handleHover(aspect.index)}
-                            onLeave={handleLeave}
-                        />
-                    ))}
+                {/* Mobile: Simple Text List */}
+                {isMobile ? (
+                    <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-12">
+                        {aspects.map((aspect) => (
+                            <div
+                                key={aspect.title}
+                                className="text-left font-serif text-base text-[#293133] border-b border-[#293133]/10 pb-3"
+                            >
+                                • {aspect.title}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    /* Desktop: Scattered Cloud Layout with Images */
+                    <div
+                        ref={containerRef}
+                        className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-6xl mx-auto mb-24 relative z-20"
+                        onMouseMove={handleMouseMove}
+                    >
+                        {aspects.map((aspect) => (
+                            <AspectItem
+                                key={aspect.title}
+                                title={aspect.title}
+                                isHovered={hoveredIndex === aspect.index}
+                                isMobile={isMobile}
+                                onHover={!isMobile ? () => handleHover(aspect.index) : undefined}
+                                onLeave={!isMobile ? handleLeave : undefined}
+                                onTap={isMobile ? () => setSelectedImage(aspect) : undefined}
+                            />
+                        ))}
+                    </div>
+                )}
 
-                    {/* Shared Cursor-Following Image Container - Only visible when hovering */}
-                    {hoveredIndex !== null && (
+                {/* Desktop: Cursor-Following Image Container */}
+                {!isMobile && hoveredIndex !== null && (
+                    <div
+                        ref={containerRef}
+                        className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-6xl mx-auto mb-24 relative z-20"
+                    >
                         <motion.div
                             style={{ x: mouseX, y: mouseY }}
                             initial={{ opacity: 0 }}
@@ -170,8 +203,8 @@ export function WhatWeDoSection() {
                                 )}
                             </AnimatePresence>
                         </motion.div>
-                    )}
-                </div>
+                    </div>
+                )}
 
                 <div className="mb-24"></div>
             </div>

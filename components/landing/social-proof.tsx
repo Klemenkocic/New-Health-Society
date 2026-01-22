@@ -9,6 +9,14 @@ import { basePath } from "@/lib/utils"
 
 const libraries: ("places")[] = ["places"]
 
+interface Review {
+    text: string
+    author_name: string
+    name?: string
+    relative_time_description: string
+    rating?: number
+}
+
 const logos = [
     { name: "Aesop", src: `${basePath}/images/clients/Aesop.png` },
     { name: "Atlantis", src: `${basePath}/images/clients/Atlantis.png` },
@@ -25,7 +33,7 @@ const logos = [
 ]
 
 // Fallback reviews
-const fallbackReviews = [
+const fallbackReviews: Review[] = [
     {
         text: "I send my patients here because I trust the science. I train here because I see the results.",
         author_name: "Dr. Thomas M.",
@@ -59,7 +67,7 @@ const fallbackReviews = [
 ]
 
 export function SocialProofSection() {
-    const [allReviews, setAllReviews] = React.useState<any[]>(fallbackReviews)
+    const [allReviews, setAllReviews] = React.useState<Review[]>(fallbackReviews)
     const [displayIndices, setDisplayIndices] = React.useState([0, 1, 2, 3])
     const [nextReviewIdx, setNextReviewIdx] = React.useState(4)
     const [cycleStep, setCycleStep] = React.useState(0) // 0, 1, 2, 3 for four slots
@@ -138,10 +146,10 @@ export function SocialProofSection() {
 
 
     return (
-        <section className="py-24 px-6 md:px-12 border-t border-foreground/5">
+        <section className="py-12 md:py-24 px-6 md:px-12 border-t border-foreground/5">
             <div className="max-w-7xl mx-auto">
-                <div className="mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
-                    <h2 className="font-serif text-5xl md:text-7xl text-foreground">Trusted By</h2>
+                <div className="mb-10 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+                    <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-foreground">Trusted By</h2>
                     <a
                         href="https://www.google.com/search?q=New+Health+Society+Munich+Reviews"
                         target="_blank"
@@ -154,7 +162,7 @@ export function SocialProofSection() {
                 </div>
 
                 {/* Animated Grid */}
-                <div className="hidden md:grid grid-cols-4 gap-6">
+                <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {displayIndices.map((reviewIndex, slotIndex) => {
                         const review = allReviews[reviewIndex] || allReviews[0]
                         return (
@@ -176,7 +184,7 @@ export function SocialProofSection() {
                                                     ))}
                                                 </div>
                                                 <p className="font-serif italic text-2xl text-foreground mb-6 line-clamp-6 leading-relaxed">
-                                                    "{review.text}"
+                                                    &ldquo;{review.text}&rdquo;
                                                 </p>
                                             </div>
                                             <div>
@@ -191,27 +199,31 @@ export function SocialProofSection() {
                     })}
                 </div>
 
-                {/* Mobile View (Simple Stack/Carousel Fallback) */}
-                <div className="md:hidden flex flex-col gap-4">
-                    {/* Just show top 3 on mobile stacked or simple overflow */}
-                    {allReviews.slice(0, 3).map((review, i) => (
-                        <div key={i} className="glass-card p-8">
-                            <div className="flex gap-1 mb-4 text-primary">
-                                {[...Array(review.rating || 5)].map((_, j) => (
-                                    <Star key={j} className="w-4 h-4 fill-current" />
+                {/* Mobile View - Horizontal Swipeable Carousel */}
+                <div className="sm:hidden overflow-x-auto scrollbar-hide -mx-6 px-6">
+                    <div className="flex gap-4 pb-4">
+                        {allReviews.slice(0, 6).map((review, i) => (
+                            <div key={i} className="glass-card p-6 min-w-[280px] max-w-[280px] flex-shrink-0">
+                                <div className="flex gap-1 mb-3 text-primary">
+                                    {[...Array(review.rating || 5)].map((_, j) => (
+                                        <Star key={j} className="w-3 h-3 fill-current" />
                                 ))}
                             </div>
-                            <p className="font-serif italic text-xl text-foreground mb-4 leading-relaxed">
-                                "{review.text}"
-                            </p>
-                            <div className="font-bold text-sm text-foreground">{review.author_name || review.name}</div>
-                        </div>
-                    ))}
+                                <p className="font-serif italic text-base text-foreground mb-4 leading-relaxed line-clamp-4">
+                                    &ldquo;{review.text}&rdquo;
+                                </p>
+                                <div>
+                                    <div className="font-bold text-sm text-foreground">{review.author_name || review.name}</div>
+                                    <div className="text-xs text-foreground/60">{review.relative_time_description || "Member"}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Logos Carousel */}
-                <div className="mt-24 pt-12 border-t border-foreground/10 relative overflow-hidden">
-                    <p className="text-center text-sm font-medium text-foreground/40 tracking-widest uppercase mb-12">Trusted by teams from</p>
+                <div className="mt-12 md:mt-24 pt-12 border-t border-foreground/10 relative overflow-hidden">
+                    <p className="text-center text-sm font-medium text-foreground/40 tracking-widest uppercase mb-8 md:mb-12">Trusted by teams from</p>
 
                     <div className="flex overflow-hidden relative w-full">
                         <motion.div

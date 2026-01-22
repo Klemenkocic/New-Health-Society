@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
+import { CookieConsent } from "@/components/layout/cookie-consent"
 import { Hero } from "@/components/landing/hero"
 import { QuoteSection } from "@/components/landing/quote"
 import { ProblemSection } from "@/components/landing/problem"
@@ -15,19 +16,20 @@ import { LocationSection } from "@/components/landing/location"
 import { ClientResultsSection } from "@/components/landing/client-results"
 
 export default function Home() {
-  const [introComplete, setIntroComplete] = useState(false)
-  const [skipIntro, setSkipIntro] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Check if user has already seen the intro in this session
-    const hasSeenIntro = sessionStorage.getItem('hasSeenIntro')
-    if (hasSeenIntro === 'true') {
-      setSkipIntro(true)
-      setIntroComplete(true)
+  // Initialize state from sessionStorage on first render
+  const [introComplete, setIntroComplete] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('hasSeenIntro') === 'true'
     }
-    setIsLoading(false)
-  }, [])
+    return false
+  })
+  const [skipIntro] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('hasSeenIntro') === 'true'
+    }
+    return false
+  })
+  const [isLoading] = useState(false) // No need for loading state with lazy initialization
 
   const handleIntroComplete = () => {
     setIntroComplete(true)
@@ -42,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen text-foreground selection:bg-primary/20" style={{ backgroundColor: introComplete ? 'transparent' : '#000000' }}>
+    <main className="min-h-screen overflow-x-hidden text-foreground selection:bg-primary/20" style={{ backgroundColor: introComplete ? 'transparent' : '#000000' }}>
       <Navbar show={introComplete} />
 
       <Hero onIntroComplete={handleIntroComplete} skipIntro={skipIntro} />
@@ -57,6 +59,7 @@ export default function Home() {
       <LocationSection />
 
       <Footer />
+      <CookieConsent />
     </main>
   )
 }

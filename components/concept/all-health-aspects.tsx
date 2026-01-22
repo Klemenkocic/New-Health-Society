@@ -58,23 +58,23 @@ export function AllHealthAspectsSection() {
     const selectedItem = selectedId ? aspects.find(a => a.id === selectedId) : null
 
     return (
-        <section className="py-12 px-6 md:px-12 bg-transparent">
+        <section className="py-8 md:py-12 px-6 md:px-12 bg-transparent">
             <div className="max-w-7xl mx-auto">
-                <div className="w-full mb-8 border-b border-[#293133]/10 pb-6">
-                    <h2 className="font-serif text-5xl md:text-7xl text-[#293133]">
+                <div className="w-full mb-6 md:mb-8 border-b border-[#293133]/10 pb-4 md:pb-6">
+                    <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl text-[#293133]">
                         All Health Aspects
                     </h2>
                 </div>
 
                 {/* Grid of aspect cards */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
                     {aspects.map((aspect) => (
                         <div
                             key={aspect.id}
                             onClick={() => setSelectedId(aspect.id)}
-                            className={`aspect-[3/2] ${aspect.color} p-4 cursor-pointer hover:brightness-95 hover:scale-[1.02] transition-all duration-200 rounded-sm flex flex-col justify-end group`}
+                            className={`aspect-square md:aspect-[3/2] ${aspect.color} p-3 md:p-4 cursor-pointer hover:brightness-95 hover:scale-[1.02] transition-all duration-200 rounded-sm flex flex-col justify-end group`}
                         >
-                            <h3 className="font-serif font-bold text-lg leading-tight text-[#293133]">
+                            <h3 className="font-serif font-bold text-xs md:text-lg leading-tight text-[#293133]">
                                 {aspect.title}
                             </h3>
                         </div>

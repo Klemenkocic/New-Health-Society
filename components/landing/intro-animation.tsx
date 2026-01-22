@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { useEffect } from "react"
-import { cn } from "@/lib/utils"
 
 export function IntroAnimation({ onComplete }: { onComplete?: () => void }) {
     useEffect(() => {
@@ -26,17 +25,17 @@ export function IntroAnimation({ onComplete }: { onComplete?: () => void }) {
             {/* Content Layer - Does NOT fade out, just moves via layoutId */}
             <div className="relative z-10 flex flex-col items-center justify-center leading-[0.8]" style={{ fontFamily: 'var(--font-brand)' }}>
                 <motion.div layoutId="word-new-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
+                    <span className="text-[clamp(2rem,6vw,6rem)] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         NEW
                     </span>
                 </motion.div>
                 <motion.div layoutId="word-health-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
+                    <span className="text-[clamp(2rem,6vw,6rem)] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         HEALTH
                     </span>
                 </motion.div>
                 <motion.div layoutId="word-society-wrapper" transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
-                    <span className="text-[6vw] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
+                    <span className="text-[clamp(2rem,6vw,6rem)] tracking-tighter text-[#26538D]" style={{ fontFamily: 'var(--font-brand)' }}>
                         SOCIETY
                     </span>
                 </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react"
+import { MapPin, Clock, Navigation } from "lucide-react"
 import { GoogleMap, useJsApiLoader, Marker, DirectionsRenderer, Autocomplete } from "@react-google-maps/api"
 import { useMemo } from "react"
 
@@ -185,7 +185,7 @@ export function LocationSection() {
     }), [])
 
     return (
-        <section className="py-12 md:pb-24 px-6 md:px-12">
+        <section className="py-12 md:py-24 px-6 md:px-12">
             <div className="max-w-[1920px] mx-auto flex flex-col lg:flex-row gap-8">
                 {/* Map Side (Left) */}
                 <div className="w-full lg:w-[65%] h-[500px] lg:h-[700px] bg-neutral-900 relative group overflow-hidden rounded-3xl shadow-lg">

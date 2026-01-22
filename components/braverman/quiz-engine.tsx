@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { questions, natureDescriptions } from "@/data/braverman"
 import { ArrowRight, ArrowLeft } from "lucide-react"
@@ -9,12 +9,26 @@ import { Button } from "@/components/ui/button"
 
 type Step = "intro" | "quiz" | "results"
 
+type QuestionCategory =
+    | "dopamine_nature"
+    | "dopamine_deficiency"
+    | "acetylcholine_nature"
+    | "acetylcholine_deficiency"
+    | "gaba_nature"
+    | "gaba_deficiency"
+    | "serotonin_nature"
+    | "serotonin_deficiency"
+
+type ScoreRecord = Record<QuestionCategory, number>
+
+type NeurotransmitterType = "dopamine" | "acetylcholine" | "gaba" | "serotonin"
+
 export function QuizEngine() {
     const [step, setStep] = useState<Step>("intro")
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [answers, setAnswers] = useState<Record<number, boolean>>({})
 
-    const handleAnswer = (value: boolean) => {
+    const handleAnswer = useCallback((value: boolean) => {
         setAnswers(prev => ({ ...prev, [questions[currentQuestionIndex].id]: value }))
 
         if (currentQuestionIndex < questions.length - 1) {
@@ -23,7 +37,7 @@ export function QuizEngine() {
             // Quiz complete, move directly to results for immediate feedback
             setTimeout(() => setStep("results"), 300)
         }
-    }
+    }, [currentQuestionIndex])
 
     // Keyboard Navigation
     useEffect(() => {
@@ -39,11 +53,11 @@ export function QuizEngine() {
 
         window.addEventListener("keydown", handleKeyDown)
         return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [step, currentQuestionIndex]) // Re-bind on index change to ensure fresh state closure
+    }, [step, handleAnswer])
 
     const calculateResults = () => {
         // Count TRUE answers for each category
-        const scores = {
+        const scores: ScoreRecord = {
             dopamine_nature: 0,
             dopamine_deficiency: 0,
             acetylcholine_nature: 0,
@@ -56,7 +70,7 @@ export function QuizEngine() {
 
         questions.forEach(q => {
             if (answers[q.id]) {
-                scores[q.category as keyof typeof scores]++
+                scores[q.category as QuestionCategory]++
             }
         })
 
@@ -70,10 +84,14 @@ export function QuizEngine() {
 
         // Find dominant neurotransmitter
         const maxScore = Math.max(...Object.values(netScores))
-        const dominant = Object.keys(netScores).find(k => netScores[k as keyof typeof netScores] === maxScore) as keyof typeof netScores
+        const dominant = (Object.keys(netScores) as NeurotransmitterType[]).find(
+            k => netScores[k] === maxScore
+        ) as NeurotransmitterType
 
         // Identify deficiencies (negative net scores)
-        const deficiencies = Object.keys(netScores).filter(k => netScores[k as keyof typeof netScores] < 0) as Array<keyof typeof netScores>
+        const deficiencies = (Object.keys(netScores) as NeurotransmitterType[]).filter(
+            k => netScores[k] < 0
+        )
 
         return { scores, netScores, dominant, deficiencies }
     }

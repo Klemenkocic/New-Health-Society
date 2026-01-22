@@ -13,9 +13,9 @@ export function QuoteSection() {
                     viewport={{ once: true }}
                     className="font-serif italic text-2xl md:text-3xl text-foreground leading-relaxed"
                 >
-                    "Health happens when you put in the work.
+                    &ldquo;Health happens when you put in the work.
                     <br />
-                    No shortcuts. Only systems."
+                    No shortcuts. Only systems.&rdquo;
                 </motion.h2>
             </div>
         </section>
